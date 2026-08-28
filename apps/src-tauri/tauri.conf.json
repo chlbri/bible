@@ -12,6 +12,7 @@
   "app": {
     "windows": [
       {
+        "label": "main",
         "title": "Bible Reader & Semantic Search",
         "width": 1200,
         "height": 800,
@@ -28,6 +29,10 @@
   "bundle": {
     "active": true,
     "targets": "all",
+    "resources": [
+      "../../bible_reader.db",
+      "../../bible_semantic.db"
+    ],
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",

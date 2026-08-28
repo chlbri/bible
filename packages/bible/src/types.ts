@@ -16,14 +16,16 @@ export interface Verse {
   text: string;
 }
 
+export interface ChapterVerse {
+  verse: number;
+  text: string;
+}
+
 export interface Chapter {
-  versionId: string;
-  versionName: string;
-  bookId: string;
-  bookName: string;
-  testament: Testament;
+  version_id: string;
+  book_id: string;
   chapter: number;
-  verses: Verse[];
+  verses: ChapterVerse[];
 }
 
 export interface SearchQuery {

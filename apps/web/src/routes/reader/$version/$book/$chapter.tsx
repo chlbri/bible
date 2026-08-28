@@ -1,9 +1,12 @@
+import { tauriBridge } from '@bemedev/bible';
 import { createFileRoute, useNavigate } from '@tanstack/solid-router';
 import { createResource, For, Show } from 'solid-js';
-import { tauriBridge } from '@bemedev/bible';
+
+import { fetchChapterServerFn } from '../../../../server/db.js';
 
 export const Route = createFileRoute('/reader/$version/$book/$chapter')({
   component: ReaderPage,
+  ssr: false,
 });
 
 function ReaderPage() {
@@ -17,23 +20,27 @@ function ReaderPage() {
       chapter: parseInt(params().chapter, 10),
     }),
     async ({ version, book, chapter }) => {
+      // 1. If running in Tauri Desktop, use Native Rust IPC
       if (tauriBridge.isTauri()) {
-        return await tauriBridge.getChapter(version, book, chapter);
+        try {
+          return await tauriBridge.getChapter(version, book, chapter);
+        } catch (e) {
+          console.warn('Tauri IPC failed, falling back to server function:', e);
+        }
       }
-      // Clean fallback for browser preview without Tauri desktop window
-      return {
-        version_id: version,
-        book_id: book,
-        chapter,
-        verses: [
-          { verse: 1, text: "Au commencement, Dieu créa les cieux et la terre." },
-          { verse: 2, text: "La terre était informe et vide: il y avait des ténèbres à la surface de l'abîme, et l'esprit de Dieu se mouvait au-dessus des eaux." },
-          { verse: 3, text: "Dieu dit: Que la lumière soit! Et la lumière fut." },
-          { verse: 4, text: "Dieu vit que la lumière était bonne; et Dieu sépara la lumière d'avec les ténèbres." },
-          { verse: 5, text: "Dieu appela la lumière jour, et il appela les ténèbres nuit. Ainsi, il y eut un soir, et il y eut un matin: ce fut le premier jour." }
-        ]
-      };
-    }
+
+      // 2. If running in Web Browser / SSR, query SQLite via TanStack Server Function
+      try {
+        const serverData = await fetchChapterServerFn({
+          data: { version, book, chapter },
+        });
+        if (serverData) return serverData;
+      } catch (e) {
+        console.error('Server function error:', e);
+      }
+
+      return null;
+    },
   );
 
   const goToChapter = (delta: number) => {
@@ -50,26 +57,28 @@ function ReaderPage() {
   };
 
   return (
-    <div class="reader-container">
+    <div class='reader-container'>
       <Show when={chapterData.loading}>
-        <div style={{ 'text-align': 'center', 'padding-top': '100px', opacity: 0.5 }}>
+        <div
+          style={{ 'text-align': 'center', 'padding-top': '100px', opacity: 0.5 }}
+        >
           Opening chapter...
         </div>
       </Show>
 
       <Show when={chapterData()}>
-        {(data) => (
+        {data => (
           <div>
-            <h1 class="chapter-title">
+            <h1 class='chapter-title'>
               {data().book_id} {data().chapter}
             </h1>
 
-            <div class="verses-content">
+            <div class='verses-content'>
               <For each={data().verses}>
-                {(v) => (
-                  <span class="verse-item">
-                    <span class="verse-number">{v.verse}</span>
-                    <span class="verse-text">{v.text} </span>
+                {v => (
+                  <span class='verse-item'>
+                    <span class='verse-number'>{v.verse}</span>
+                    <span class='verse-text'>{v.text} </span>
                   </span>
                 )}
               </For>
@@ -78,14 +87,14 @@ function ReaderPage() {
         )}
       </Show>
 
-      <footer class="reader-footer">
-        <button class="btn" onClick={() => goToChapter(-1)}>
+      <footer class='reader-footer'>
+        <button class='btn' onClick={() => goToChapter(-1)}>
           ← Previous
         </button>
         <span style={{ opacity: 0.7 }}>
           {params().book} {params().chapter} ({params().version.toUpperCase()})
         </span>
-        <button class="btn" onClick={() => goToChapter(1)}>
+        <button class='btn' onClick={() => goToChapter(1)}>
           Next →
         </button>
       </footer>
