@@ -1,5 +1,5 @@
 {
-  "name": "@bemedev/new-package-name-to-change",
+  "name": "@bemedev/bible",
   "version": "0.0.1",
   "description": "The package name need to be changed",
   "type": "module",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "//TODO: the new repository"
+    "url": "https://github.com/chlbri/bible"
   },
   "maintainers": [
     {

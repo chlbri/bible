@@ -1,11 +1,16 @@
-## CHANGELOG
+# Beatifull lib
+
+A beautifull description
 
 <br/>
-<br/>
 
-### Version [0.0.1] --> _date & hour_
+## Licence
 
-- ✨ Première version de la bibliothèque
+MIT
+
+## CHANGE_LOG
+
+Read [CHANGELOG.md](CHANGELOG.md) for more details about the changes.
 
 <br/>
 
@@ -21,4 +26,4 @@ chlbri (bri_lvi@icloud.com)
 
 ## Liens
 
-- [Documentation](https://github.com/chlbri/new-package)
+- [Documentation](https://github.com/chlbri/bible)

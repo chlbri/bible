@@ -1,5 +1,5 @@
 packages:
-  - 'packages/core'
+  - 'packages/bible'
   - 'packages/__tests__/project1'
 
 allowBuilds:

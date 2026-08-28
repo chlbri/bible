@@ -59,12 +59,12 @@ importers:
 
   packages/__tests__/project1:
     devDependencies:
+      '@bemedev/bible':
+        specifier: workspace:^
+        version: link:../../bible
       '@bemedev/dev-utils':
         specifier: ^1.5.0
         version: 1.5.0(rolldown@1.2.6)(rollup@4.63.1)(supports-color@7.2.0)(vite@8.2.2(@types/node@26.4.0)(esbuild@0.28.2)(tsx@4.23.12))(vitest@4.1.11)
-      '@bemedev/new-package-name-to-change':
-        specifier: workspace:^
-        version: link:../../core
       typescript:
         specifier: ^7.0.2
         version: 7.0.2
@@ -72,7 +72,7 @@ importers:
         specifier: ^4.1.11
         version: 4.1.11(@types/node@26.4.0)(@vitest/coverage-v8@4.1.11)(vite@8.2.2(@types/node@26.4.0)(esbuild@0.28.2)(tsx@4.23.12))
 
-  packages/core:
+  packages/bible:
     devDependencies:
       '@bemedev/dev-utils':
         specifier: ^1.5.0

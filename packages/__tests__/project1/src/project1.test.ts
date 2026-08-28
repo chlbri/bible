@@ -1,4 +1,4 @@
-import todo from '@bemedev/new-package-name-to-change';
+import todo from '@bemedev/bible';
 
 describe('project1 tests', () => {
   test('runs core todo function', () => {

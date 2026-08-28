@@ -1,3 +1,3 @@
 import { defineProject } from '@bemedev/dev-utils/vitest-extended';
 
-export default defineProject({ test: { name: 'core' } });
+export default defineProject({ test: { name: 'bible' } });

@@ -19,7 +19,7 @@ export default defineConfig({
     },
 
     projects: [
-      'packages/core/vitest.config.ts',
+      'packages/bible/vitest.config.ts',
       'packages/__tests__/project1/vitest.config.ts',
     ],
   },
