@@ -1,0 +1,77 @@
+{
+  "name": "@bemedev/new-package-name-to-change",
+  "version": "0.0.1",
+  "description": "The package name need to be changed",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "module": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "author": {
+    "email": "bri_lvi@icloud.com",
+    "name": "chlbri",
+    "url": "https://bemedev.vercel.app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "//TODO: the new repository"
+  },
+  "maintainers": [
+    {
+      "email": "bri_lvi@icloud.com",
+      "name": "chlbri",
+      "url": "https://bemedev.vercel.app"
+    }
+  ],
+  "contributors": [
+    {
+      "email": "bri_lvi@icloud.com",
+      "name": "chlbri",
+      "url": "https://bemedev.vercel.app"
+    }
+  ],
+  "keywords": [
+    "//TODO:"
+  ],
+  "scripts": {
+    "build": "pnpm run rm:lib && pnpm run rolldown",
+    "rm:lib": "pnpx rimraf ./lib",
+    "test": "vitest run",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "_lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "lint": "pnpm run fmt && pnpm run lint:fix",
+    "p-q": "pretty-quick",
+    "pretest": "pnpm run build && pnpm run size",
+    "posttest": "exit 0",
+    "test:only": "pnpm run test --no-coverage",
+    "_ci": "pnpm run lint && pnpm run test",
+    "size": "size-limit",
+    "rolldown": "rolldown -c"
+  },
+  "devDependencies": {
+    "@bemedev/dev-utils": "^1.5.0",
+    "@size-limit/file": "^13.0.3",
+    "rolldown": "^1.2.6",
+    "size-limit": "^13.0.3",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  },
+  "size-limit": [
+    {
+      "path": "lib/**/*.js",
+      "limit": "10kb"
+    },
+    {
+      "path": "lib/**/*.d.ts",
+      "limit": "10kb"
+    },
+    {
+      "path": "lib/**/*.cjs",
+      "limit": "10 kb"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+packages:
+  - 'packages/core'
+  - 'packages/__tests__/project1'
+
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+
+nodeLinker: hoisted
+
+minimumReleaseAge: 300
+
+minimumReleaseAgeExclude:
+  - '@bemedev/*'
+
