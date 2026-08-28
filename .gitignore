@@ -146,6 +146,22 @@ build.npm.js
 #vitest
 tsconfig.vitest-temp.json
 
-#tanstack
+#tanstack & nitro
 .tanstack
+.nitro
+.output
+.vinxi
+dist
+
+# Rust / Cargo / Tauri
+**/target
+**/*.rs.bk
+
+# SQLite databases and journal files
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
 

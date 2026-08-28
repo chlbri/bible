@@ -53,6 +53,12 @@
     "check-updates": "pnpm dlx npm-check-updates -w -u --dep peer,optional,prod",
     "prepare": "husky",
     "rm:lib": "pnpm -r --sort --sequential run rm:lib",
+    "seed:reader": "pnpm --filter @bemedev/bible-scripts seed:reader",
+    "seed:semantic": "pnpm --filter @bemedev/bible-scripts seed:semantic",
+    "test:query": "pnpm --filter @bemedev/bible-scripts test:query",
+    "dev:web": "pnpm --filter @bemedev/bible-web dev",
+    "dev:tauri": "pnpm dlx @tauri-apps/cli dev --config apps/src-tauri/tauri.conf.json",
+    "build:tauri": "pnpm dlx @tauri-apps/cli build --config apps/src-tauri/tauri.conf.json",
     "p-q": "pretty-quick"
   },
   "devDependencies": {

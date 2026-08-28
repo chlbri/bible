@@ -1,6 +1,9 @@
 packages:
   - 'packages/bible'
-  - 'packages/__tests__/project1'
+  - 'packages/scripts'
+  - 'packages/__tests__/roject1'
+  - 'apps/src-tauri'
+  - 'apps/web'
 
 allowBuilds:
   '@parcel/watcher': true
@@ -12,4 +15,3 @@ minimumReleaseAge: 300
 
 minimumReleaseAgeExclude:
   - '@bemedev/*'
-

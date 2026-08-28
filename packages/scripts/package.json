@@ -1,0 +1,21 @@
+{
+  "name": "@bemedev/bible-scripts",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Offline data ingestion, embedding and benchmarking pipelines for Bible app",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "seed:reader": "tsx src/seed-reader-db.ts",
+    "seed:semantic": "tsx src/seed-semantic-db.ts",
+    "test:query": "tsx src/test-query.ts"
+  },
+  "dependencies": {
+    "@bemedev/bible": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  }
+}
