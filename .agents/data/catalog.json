@@ -1,0 +1,122 @@
+[
+  {
+    "id": "en_kjv",
+    "name": "King James Version (KJV 1611/1769)",
+    "language": "English",
+    "file": "json/en_kjv.json",
+    "file_size_mb": 4.41,
+    "ot_books": 39,
+    "nt_books": 27,
+    "total_books": 66,
+    "total_chapters": 1189,
+    "total_verses": 31102
+  },
+  {
+    "id": "en_web",
+    "name": "World English Bible (WEB)",
+    "language": "English",
+    "file": "json/en_web.json",
+    "file_size_mb": 4.29,
+    "ot_books": 39,
+    "nt_books": 27,
+    "total_books": 66,
+    "total_chapters": 1189,
+    "total_verses": 31102
+  },
+  {
+    "id": "en_ylt",
+    "name": "Young's Literal Translation (YLT 1898)",
+    "language": "English",
+    "file": "json/en_ylt.json",
+    "file_size_mb": 4.39,
+    "ot_books": 39,
+    "nt_books": 27,
+    "total_books": 66,
+    "total_chapters": 1189,
+    "total_verses": 31102
+  },
+  {
+    "id": "en_bsb",
+    "name": "Berean Study Bible (BSB)",
+    "language": "English",
+    "file": "json/en_bsb.json",
+    "file_size_mb": 4.12,
+    "ot_books": 39,
+    "nt_books": 27,
+    "total_books": 66,
+    "total_chapters": 1189,
+    "total_verses": 31102
+  },
+  {
+    "id": "en_bbe",
+    "name": "Bible in Basic English (BBE 1949/1964)",
+    "language": "English",
+    "file": "json/en_bbe.json",
+    "file_size_mb": 4.4,
+    "ot_books": 39,
+    "nt_books": 27,
+    "total_books": 66,
+    "total_chapters": 1189,
+    "total_verses": 31104
+  },
+  {
+    "id": "en_asv",
+    "name": "American Standard Version (ASV 1901)",
+    "language": "English",
+    "file": "json/en_asv.json",
+    "file_size_mb": 4.39,
+    "ot_books": 39,
+    "nt_books": 27,
+    "total_books": 66,
+    "total_chapters": 1189,
+    "total_verses": 31085
+  },
+  {
+    "id": "fr_lsg",
+    "name": "Louis Segond 1910 (LSG)",
+    "language": "French",
+    "file": "json/fr_lsg.json",
+    "file_size_mb": 4.44,
+    "ot_books": 39,
+    "nt_books": 27,
+    "total_books": 66,
+    "total_chapters": 1189,
+    "total_verses": 31102
+  },
+  {
+    "id": "fr_mar",
+    "name": "Bible David Martin 1744",
+    "language": "French",
+    "file": "json/fr_mar.json",
+    "file_size_mb": 4.74,
+    "ot_books": 39,
+    "nt_books": 27,
+    "total_books": 66,
+    "total_chapters": 1189,
+    "total_verses": 31103
+  },
+  {
+    "id": "fr_ost",
+    "name": "Bible Ostervald 1996",
+    "language": "French",
+    "file": "json/fr_ost.json",
+    "file_size_mb": 4.51,
+    "ot_books": 39,
+    "nt_books": 27,
+    "total_books": 66,
+    "total_chapters": 1189,
+    "total_verses": 31172
+  },
+  {
+    "id": "fr_apee",
+    "name": "Bible de l'Épée (APEE)",
+    "language": "French",
+    "file": "json/fr_apee.json",
+    "file_size_mb": 4.51,
+    "ot_books": 39,
+    "nt_books": 27,
+    "total_books": 66,
+    "total_chapters": 1189,
+    "total_verses": 30975
+  }
+]

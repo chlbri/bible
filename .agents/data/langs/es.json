@@ -1,0 +1,1352 @@
+{
+  "language_code": "es",
+  "language_name": "Español",
+  "tokens": {
+    "testaments": "Testamentos",
+    "old_testament": "Antiguo Testamento",
+    "new_testament": "Nuevo Testamento",
+    "books": "Libros",
+    "book": "Libro",
+    "chapters": "Capítulos",
+    "chapter": "Capítulo",
+    "verses": "Versículos",
+    "verse": "Versículo",
+    "version": "Versión",
+    "language": "Idioma",
+    "translation": "Traducción",
+    "abbreviation": "Abreviatura",
+    "table_of_contents": "Tabla de contenido"
+  },
+  "testaments": {
+    "Old Testament": "Antiguo Testamento",
+    "New Testament": "Nuevo Testamento"
+  },
+  "books_by_canonical_name": {
+    "Genesis": {
+      "id": "GEN",
+      "canonical_name": "Genesis",
+      "translated_name": "Génesis",
+      "short_name": "Gén",
+      "abbreviation": "gn",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 1
+    },
+    "Exodus": {
+      "id": "EXO",
+      "canonical_name": "Exodus",
+      "translated_name": "Éxodo",
+      "short_name": "Éx",
+      "abbreviation": "ex",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 2
+    },
+    "Leviticus": {
+      "id": "LEV",
+      "canonical_name": "Leviticus",
+      "translated_name": "Levítico",
+      "short_name": "Lev",
+      "abbreviation": "lv",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 3
+    },
+    "Numbers": {
+      "id": "NUM",
+      "canonical_name": "Numbers",
+      "translated_name": "Números",
+      "short_name": "Núm",
+      "abbreviation": "nm",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 4
+    },
+    "Deuteronomy": {
+      "id": "DEU",
+      "canonical_name": "Deuteronomy",
+      "translated_name": "Deuteronomio",
+      "short_name": "Deut",
+      "abbreviation": "dt",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 5
+    },
+    "Joshua": {
+      "id": "JOS",
+      "canonical_name": "Joshua",
+      "translated_name": "Josué",
+      "short_name": "Jos",
+      "abbreviation": "js",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 6
+    },
+    "Judges": {
+      "id": "JDG",
+      "canonical_name": "Judges",
+      "translated_name": "Jueces",
+      "short_name": "Jue",
+      "abbreviation": "jz",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 7
+    },
+    "Ruth": {
+      "id": "RUT",
+      "canonical_name": "Ruth",
+      "translated_name": "Rut",
+      "short_name": "Rut",
+      "abbreviation": "rt",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 8
+    },
+    "1 Samuel": {
+      "id": "1SA",
+      "canonical_name": "1 Samuel",
+      "translated_name": "1 Samuel",
+      "short_name": "1 Sam",
+      "abbreviation": "1sm",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 9
+    },
+    "2 Samuel": {
+      "id": "2SA",
+      "canonical_name": "2 Samuel",
+      "translated_name": "2 Samuel",
+      "short_name": "2 Sam",
+      "abbreviation": "2sm",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 10
+    },
+    "1 Kings": {
+      "id": "1KI",
+      "canonical_name": "1 Kings",
+      "translated_name": "1 Reyes",
+      "short_name": "1 Rey",
+      "abbreviation": "1rs",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 11
+    },
+    "2 Kings": {
+      "id": "2KI",
+      "canonical_name": "2 Kings",
+      "translated_name": "2 Reyes",
+      "short_name": "2 Rey",
+      "abbreviation": "2rs",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 12
+    },
+    "1 Chronicles": {
+      "id": "1CH",
+      "canonical_name": "1 Chronicles",
+      "translated_name": "1 Crónicas",
+      "short_name": "1 Crón",
+      "abbreviation": "1cr",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 13
+    },
+    "2 Chronicles": {
+      "id": "2CH",
+      "canonical_name": "2 Chronicles",
+      "translated_name": "2 Crónicas",
+      "short_name": "2 Crón",
+      "abbreviation": "2cr",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 14
+    },
+    "Ezra": {
+      "id": "EZR",
+      "canonical_name": "Ezra",
+      "translated_name": "Esdras",
+      "short_name": "Esd",
+      "abbreviation": "ed",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 15
+    },
+    "Nehemiah": {
+      "id": "NEH",
+      "canonical_name": "Nehemiah",
+      "translated_name": "Nehemías",
+      "short_name": "Neh",
+      "abbreviation": "ne",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 16
+    },
+    "Esther": {
+      "id": "EST",
+      "canonical_name": "Esther",
+      "translated_name": "Ester",
+      "short_name": "Est",
+      "abbreviation": "et",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 17
+    },
+    "Job": {
+      "id": "JOB",
+      "canonical_name": "Job",
+      "translated_name": "Job",
+      "short_name": "Job",
+      "abbreviation": "job",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 18
+    },
+    "Psalms": {
+      "id": "PSA",
+      "canonical_name": "Psalms",
+      "translated_name": "Salmos",
+      "short_name": "Sal",
+      "abbreviation": "ps",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 19
+    },
+    "Proverbs": {
+      "id": "PRO",
+      "canonical_name": "Proverbs",
+      "translated_name": "Proverbios",
+      "short_name": "Prov",
+      "abbreviation": "pv",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 20
+    },
+    "Ecclesiastes": {
+      "id": "ECC",
+      "canonical_name": "Ecclesiastes",
+      "translated_name": "Eclesiastés",
+      "short_name": "Ecl",
+      "abbreviation": "ec",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 21
+    },
+    "Song of Solomon": {
+      "id": "SNG",
+      "canonical_name": "Song of Solomon",
+      "translated_name": "Cantares",
+      "short_name": "Cant",
+      "abbreviation": "ct",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 22
+    },
+    "Isaiah": {
+      "id": "ISA",
+      "canonical_name": "Isaiah",
+      "translated_name": "Isaías",
+      "short_name": "Isa",
+      "abbreviation": "is",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 23
+    },
+    "Jeremiah": {
+      "id": "JER",
+      "canonical_name": "Jeremiah",
+      "translated_name": "Jeremías",
+      "short_name": "Jer",
+      "abbreviation": "jr",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 24
+    },
+    "Lamentations": {
+      "id": "LAM",
+      "canonical_name": "Lamentations",
+      "translated_name": "Lamentaciones",
+      "short_name": "Lam",
+      "abbreviation": "lm",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 25
+    },
+    "Ezekiel": {
+      "id": "EZK",
+      "canonical_name": "Ezekiel",
+      "translated_name": "Ezequiel",
+      "short_name": "Eze",
+      "abbreviation": "ez",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 26
+    },
+    "Daniel": {
+      "id": "DAN",
+      "canonical_name": "Daniel",
+      "translated_name": "Daniel",
+      "short_name": "Dan",
+      "abbreviation": "dn",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 27
+    },
+    "Hosea": {
+      "id": "HOS",
+      "canonical_name": "Hosea",
+      "translated_name": "Oseas",
+      "short_name": "Ose",
+      "abbreviation": "os",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 28
+    },
+    "Joel": {
+      "id": "JOL",
+      "canonical_name": "Joel",
+      "translated_name": "Joel",
+      "short_name": "Joel",
+      "abbreviation": "jl",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 29
+    },
+    "Amos": {
+      "id": "AMO",
+      "canonical_name": "Amos",
+      "translated_name": "Amós",
+      "short_name": "Amós",
+      "abbreviation": "am",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 30
+    },
+    "Obadiah": {
+      "id": "OBA",
+      "canonical_name": "Obadiah",
+      "translated_name": "Abdías",
+      "short_name": "Abd",
+      "abbreviation": "ob",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 31
+    },
+    "Jonah": {
+      "id": "JON",
+      "canonical_name": "Jonah",
+      "translated_name": "Jonás",
+      "short_name": "Jon",
+      "abbreviation": "jn",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 32
+    },
+    "Micah": {
+      "id": "MIC",
+      "canonical_name": "Micah",
+      "translated_name": "Miqueas",
+      "short_name": "Miq",
+      "abbreviation": "mq",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 33
+    },
+    "Nahum": {
+      "id": "NAM",
+      "canonical_name": "Nahum",
+      "translated_name": "Nahúm",
+      "short_name": "Nah",
+      "abbreviation": "na",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 34
+    },
+    "Habakkuk": {
+      "id": "HAB",
+      "canonical_name": "Habakkuk",
+      "translated_name": "Habacuc",
+      "short_name": "Hab",
+      "abbreviation": "hc",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 35
+    },
+    "Zephaniah": {
+      "id": "ZEP",
+      "canonical_name": "Zephaniah",
+      "translated_name": "Sofonías",
+      "short_name": "Sof",
+      "abbreviation": "sf",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 36
+    },
+    "Haggai": {
+      "id": "HAG",
+      "canonical_name": "Haggai",
+      "translated_name": "Hageo",
+      "short_name": "Hag",
+      "abbreviation": "ag",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 37
+    },
+    "Zechariah": {
+      "id": "ZEC",
+      "canonical_name": "Zechariah",
+      "translated_name": "Zacarías",
+      "short_name": "Zac",
+      "abbreviation": "zc",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 38
+    },
+    "Malachi": {
+      "id": "MAL",
+      "canonical_name": "Malachi",
+      "translated_name": "Malaquías",
+      "short_name": "Mal",
+      "abbreviation": "ml",
+      "testament_canonical": "Old Testament",
+      "testament_translated": "Antiguo Testamento",
+      "canonical_order": 39
+    },
+    "Matthew": {
+      "id": "MAT",
+      "canonical_name": "Matthew",
+      "translated_name": "Mateo",
+      "short_name": "Mat",
+      "abbreviation": "mt",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 40
+    },
+    "Mark": {
+      "id": "MRK",
+      "canonical_name": "Mark",
+      "translated_name": "Marcos",
+      "short_name": "Mar",
+      "abbreviation": "mc",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 41
+    },
+    "Luke": {
+      "id": "LUK",
+      "canonical_name": "Luke",
+      "translated_name": "Lucas",
+      "short_name": "Luc",
+      "abbreviation": "lc",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 42
+    },
+    "John": {
+      "id": "JHN",
+      "canonical_name": "John",
+      "translated_name": "Juan",
+      "short_name": "Juan",
+      "abbreviation": "jo",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 43
+    },
+    "Acts": {
+      "id": "ACT",
+      "canonical_name": "Acts",
+      "translated_name": "Hechos",
+      "short_name": "Hech",
+      "abbreviation": "at",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 44
+    },
+    "Romans": {
+      "id": "ROM",
+      "canonical_name": "Romans",
+      "translated_name": "Romanos",
+      "short_name": "Rom",
+      "abbreviation": "rm",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 45
+    },
+    "1 Corinthians": {
+      "id": "1CO",
+      "canonical_name": "1 Corinthians",
+      "translated_name": "1 Corintios",
+      "short_name": "1 Cor",
+      "abbreviation": "1co",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 46
+    },
+    "2 Corinthians": {
+      "id": "2CO",
+      "canonical_name": "2 Corinthians",
+      "translated_name": "2 Corintios",
+      "short_name": "2 Cor",
+      "abbreviation": "2co",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 47
+    },
+    "Galatians": {
+      "id": "GAL",
+      "canonical_name": "Galatians",
+      "translated_name": "Gálatas",
+      "short_name": "Gál",
+      "abbreviation": "gl",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 48
+    },
+    "Ephesians": {
+      "id": "EPH",
+      "canonical_name": "Ephesians",
+      "translated_name": "Efesios",
+      "short_name": "Efe",
+      "abbreviation": "ef",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 49
+    },
+    "Philippians": {
+      "id": "PHP",
+      "canonical_name": "Philippians",
+      "translated_name": "Filipenses",
+      "short_name": "Fil",
+      "abbreviation": "fp",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 50
+    },
+    "Colossians": {
+      "id": "COL",
+      "canonical_name": "Colossians",
+      "translated_name": "Colosenses",
+      "short_name": "Col",
+      "abbreviation": "cl",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 51
+    },
+    "1 Thessalonians": {
+      "id": "1TH",
+      "canonical_name": "1 Thessalonians",
+      "translated_name": "1 Tesalonicenses",
+      "short_name": "1 Tes",
+      "abbreviation": "1ts",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 52
+    },
+    "2 Thessalonians": {
+      "id": "2TH",
+      "canonical_name": "2 Thessalonians",
+      "translated_name": "2 Tesalonicenses",
+      "short_name": "2 Tes",
+      "abbreviation": "2ts",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 53
+    },
+    "1 Timothy": {
+      "id": "1TI",
+      "canonical_name": "1 Timothy",
+      "translated_name": "1 Timoteo",
+      "short_name": "1 Tim",
+      "abbreviation": "1tm",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 54
+    },
+    "2 Timothy": {
+      "id": "2TI",
+      "canonical_name": "2 Timothy",
+      "translated_name": "2 Timoteo",
+      "short_name": "2 Tim",
+      "abbreviation": "2tm",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 55
+    },
+    "Titus": {
+      "id": "TIT",
+      "canonical_name": "Titus",
+      "translated_name": "Tito",
+      "short_name": "Tit",
+      "abbreviation": "tt",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 56
+    },
+    "Philemon": {
+      "id": "PHM",
+      "canonical_name": "Philemon",
+      "translated_name": "Filemón",
+      "short_name": "Filem",
+      "abbreviation": "fm",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 57
+    },
+    "Hebrews": {
+      "id": "HEB",
+      "canonical_name": "Hebrews",
+      "translated_name": "Hebreos",
+      "short_name": "Heb",
+      "abbreviation": "hb",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 58
+    },
+    "James": {
+      "id": "JAS",
+      "canonical_name": "James",
+      "translated_name": "Santiago",
+      "short_name": "Sant",
+      "abbreviation": "tg",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 59
+    },
+    "1 Peter": {
+      "id": "1PE",
+      "canonical_name": "1 Peter",
+      "translated_name": "1 Pedro",
+      "short_name": "1 Ped",
+      "abbreviation": "1pe",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 60
+    },
+    "2 Peter": {
+      "id": "2PE",
+      "canonical_name": "2 Peter",
+      "translated_name": "2 Pedro",
+      "short_name": "2 Ped",
+      "abbreviation": "2pe",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 61
+    },
+    "1 John": {
+      "id": "1JN",
+      "canonical_name": "1 John",
+      "translated_name": "1 Juan",
+      "short_name": "1 Juan",
+      "abbreviation": "1jo",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 62
+    },
+    "2 John": {
+      "id": "2JN",
+      "canonical_name": "2 John",
+      "translated_name": "2 Juan",
+      "short_name": "2 Juan",
+      "abbreviation": "2jo",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 63
+    },
+    "3 John": {
+      "id": "3JN",
+      "canonical_name": "3 John",
+      "translated_name": "3 Juan",
+      "short_name": "3 Juan",
+      "abbreviation": "3jo",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 64
+    },
+    "Jude": {
+      "id": "JUD",
+      "canonical_name": "Jude",
+      "translated_name": "Judas",
+      "short_name": "Jud",
+      "abbreviation": "jd",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 65
+    },
+    "Revelation": {
+      "id": "REV",
+      "canonical_name": "Revelation",
+      "translated_name": "Apocalipsis",
+      "short_name": "Apoc",
+      "abbreviation": "ap",
+      "testament_canonical": "New Testament",
+      "testament_translated": "Nuevo Testamento",
+      "canonical_order": 66
+    }
+  },
+  "books_by_testament": {
+    "Antiguo Testamento": [
+      {
+        "id": "GEN",
+        "canonical_name": "Genesis",
+        "translated_name": "Génesis",
+        "short_name": "Gén",
+        "abbreviation": "gn",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 1
+      },
+      {
+        "id": "EXO",
+        "canonical_name": "Exodus",
+        "translated_name": "Éxodo",
+        "short_name": "Éx",
+        "abbreviation": "ex",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 2
+      },
+      {
+        "id": "LEV",
+        "canonical_name": "Leviticus",
+        "translated_name": "Levítico",
+        "short_name": "Lev",
+        "abbreviation": "lv",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 3
+      },
+      {
+        "id": "NUM",
+        "canonical_name": "Numbers",
+        "translated_name": "Números",
+        "short_name": "Núm",
+        "abbreviation": "nm",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 4
+      },
+      {
+        "id": "DEU",
+        "canonical_name": "Deuteronomy",
+        "translated_name": "Deuteronomio",
+        "short_name": "Deut",
+        "abbreviation": "dt",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 5
+      },
+      {
+        "id": "JOS",
+        "canonical_name": "Joshua",
+        "translated_name": "Josué",
+        "short_name": "Jos",
+        "abbreviation": "js",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 6
+      },
+      {
+        "id": "JDG",
+        "canonical_name": "Judges",
+        "translated_name": "Jueces",
+        "short_name": "Jue",
+        "abbreviation": "jz",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 7
+      },
+      {
+        "id": "RUT",
+        "canonical_name": "Ruth",
+        "translated_name": "Rut",
+        "short_name": "Rut",
+        "abbreviation": "rt",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 8
+      },
+      {
+        "id": "1SA",
+        "canonical_name": "1 Samuel",
+        "translated_name": "1 Samuel",
+        "short_name": "1 Sam",
+        "abbreviation": "1sm",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 9
+      },
+      {
+        "id": "2SA",
+        "canonical_name": "2 Samuel",
+        "translated_name": "2 Samuel",
+        "short_name": "2 Sam",
+        "abbreviation": "2sm",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 10
+      },
+      {
+        "id": "1KI",
+        "canonical_name": "1 Kings",
+        "translated_name": "1 Reyes",
+        "short_name": "1 Rey",
+        "abbreviation": "1rs",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 11
+      },
+      {
+        "id": "2KI",
+        "canonical_name": "2 Kings",
+        "translated_name": "2 Reyes",
+        "short_name": "2 Rey",
+        "abbreviation": "2rs",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 12
+      },
+      {
+        "id": "1CH",
+        "canonical_name": "1 Chronicles",
+        "translated_name": "1 Crónicas",
+        "short_name": "1 Crón",
+        "abbreviation": "1cr",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 13
+      },
+      {
+        "id": "2CH",
+        "canonical_name": "2 Chronicles",
+        "translated_name": "2 Crónicas",
+        "short_name": "2 Crón",
+        "abbreviation": "2cr",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 14
+      },
+      {
+        "id": "EZR",
+        "canonical_name": "Ezra",
+        "translated_name": "Esdras",
+        "short_name": "Esd",
+        "abbreviation": "ed",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 15
+      },
+      {
+        "id": "NEH",
+        "canonical_name": "Nehemiah",
+        "translated_name": "Nehemías",
+        "short_name": "Neh",
+        "abbreviation": "ne",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 16
+      },
+      {
+        "id": "EST",
+        "canonical_name": "Esther",
+        "translated_name": "Ester",
+        "short_name": "Est",
+        "abbreviation": "et",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 17
+      },
+      {
+        "id": "JOB",
+        "canonical_name": "Job",
+        "translated_name": "Job",
+        "short_name": "Job",
+        "abbreviation": "job",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 18
+      },
+      {
+        "id": "PSA",
+        "canonical_name": "Psalms",
+        "translated_name": "Salmos",
+        "short_name": "Sal",
+        "abbreviation": "ps",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 19
+      },
+      {
+        "id": "PRO",
+        "canonical_name": "Proverbs",
+        "translated_name": "Proverbios",
+        "short_name": "Prov",
+        "abbreviation": "pv",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 20
+      },
+      {
+        "id": "ECC",
+        "canonical_name": "Ecclesiastes",
+        "translated_name": "Eclesiastés",
+        "short_name": "Ecl",
+        "abbreviation": "ec",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 21
+      },
+      {
+        "id": "SNG",
+        "canonical_name": "Song of Solomon",
+        "translated_name": "Cantares",
+        "short_name": "Cant",
+        "abbreviation": "ct",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 22
+      },
+      {
+        "id": "ISA",
+        "canonical_name": "Isaiah",
+        "translated_name": "Isaías",
+        "short_name": "Isa",
+        "abbreviation": "is",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 23
+      },
+      {
+        "id": "JER",
+        "canonical_name": "Jeremiah",
+        "translated_name": "Jeremías",
+        "short_name": "Jer",
+        "abbreviation": "jr",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 24
+      },
+      {
+        "id": "LAM",
+        "canonical_name": "Lamentations",
+        "translated_name": "Lamentaciones",
+        "short_name": "Lam",
+        "abbreviation": "lm",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 25
+      },
+      {
+        "id": "EZK",
+        "canonical_name": "Ezekiel",
+        "translated_name": "Ezequiel",
+        "short_name": "Eze",
+        "abbreviation": "ez",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 26
+      },
+      {
+        "id": "DAN",
+        "canonical_name": "Daniel",
+        "translated_name": "Daniel",
+        "short_name": "Dan",
+        "abbreviation": "dn",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 27
+      },
+      {
+        "id": "HOS",
+        "canonical_name": "Hosea",
+        "translated_name": "Oseas",
+        "short_name": "Ose",
+        "abbreviation": "os",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 28
+      },
+      {
+        "id": "JOL",
+        "canonical_name": "Joel",
+        "translated_name": "Joel",
+        "short_name": "Joel",
+        "abbreviation": "jl",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 29
+      },
+      {
+        "id": "AMO",
+        "canonical_name": "Amos",
+        "translated_name": "Amós",
+        "short_name": "Amós",
+        "abbreviation": "am",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 30
+      },
+      {
+        "id": "OBA",
+        "canonical_name": "Obadiah",
+        "translated_name": "Abdías",
+        "short_name": "Abd",
+        "abbreviation": "ob",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 31
+      },
+      {
+        "id": "JON",
+        "canonical_name": "Jonah",
+        "translated_name": "Jonás",
+        "short_name": "Jon",
+        "abbreviation": "jn",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 32
+      },
+      {
+        "id": "MIC",
+        "canonical_name": "Micah",
+        "translated_name": "Miqueas",
+        "short_name": "Miq",
+        "abbreviation": "mq",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 33
+      },
+      {
+        "id": "NAM",
+        "canonical_name": "Nahum",
+        "translated_name": "Nahúm",
+        "short_name": "Nah",
+        "abbreviation": "na",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 34
+      },
+      {
+        "id": "HAB",
+        "canonical_name": "Habakkuk",
+        "translated_name": "Habacuc",
+        "short_name": "Hab",
+        "abbreviation": "hc",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 35
+      },
+      {
+        "id": "ZEP",
+        "canonical_name": "Zephaniah",
+        "translated_name": "Sofonías",
+        "short_name": "Sof",
+        "abbreviation": "sf",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 36
+      },
+      {
+        "id": "HAG",
+        "canonical_name": "Haggai",
+        "translated_name": "Hageo",
+        "short_name": "Hag",
+        "abbreviation": "ag",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 37
+      },
+      {
+        "id": "ZEC",
+        "canonical_name": "Zechariah",
+        "translated_name": "Zacarías",
+        "short_name": "Zac",
+        "abbreviation": "zc",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 38
+      },
+      {
+        "id": "MAL",
+        "canonical_name": "Malachi",
+        "translated_name": "Malaquías",
+        "short_name": "Mal",
+        "abbreviation": "ml",
+        "testament_canonical": "Old Testament",
+        "testament_translated": "Antiguo Testamento",
+        "canonical_order": 39
+      }
+    ],
+    "Nuevo Testamento": [
+      {
+        "id": "MAT",
+        "canonical_name": "Matthew",
+        "translated_name": "Mateo",
+        "short_name": "Mat",
+        "abbreviation": "mt",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 40
+      },
+      {
+        "id": "MRK",
+        "canonical_name": "Mark",
+        "translated_name": "Marcos",
+        "short_name": "Mar",
+        "abbreviation": "mc",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 41
+      },
+      {
+        "id": "LUK",
+        "canonical_name": "Luke",
+        "translated_name": "Lucas",
+        "short_name": "Luc",
+        "abbreviation": "lc",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 42
+      },
+      {
+        "id": "JHN",
+        "canonical_name": "John",
+        "translated_name": "Juan",
+        "short_name": "Juan",
+        "abbreviation": "jo",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 43
+      },
+      {
+        "id": "ACT",
+        "canonical_name": "Acts",
+        "translated_name": "Hechos",
+        "short_name": "Hech",
+        "abbreviation": "at",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 44
+      },
+      {
+        "id": "ROM",
+        "canonical_name": "Romans",
+        "translated_name": "Romanos",
+        "short_name": "Rom",
+        "abbreviation": "rm",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 45
+      },
+      {
+        "id": "1CO",
+        "canonical_name": "1 Corinthians",
+        "translated_name": "1 Corintios",
+        "short_name": "1 Cor",
+        "abbreviation": "1co",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 46
+      },
+      {
+        "id": "2CO",
+        "canonical_name": "2 Corinthians",
+        "translated_name": "2 Corintios",
+        "short_name": "2 Cor",
+        "abbreviation": "2co",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 47
+      },
+      {
+        "id": "GAL",
+        "canonical_name": "Galatians",
+        "translated_name": "Gálatas",
+        "short_name": "Gál",
+        "abbreviation": "gl",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 48
+      },
+      {
+        "id": "EPH",
+        "canonical_name": "Ephesians",
+        "translated_name": "Efesios",
+        "short_name": "Efe",
+        "abbreviation": "ef",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 49
+      },
+      {
+        "id": "PHP",
+        "canonical_name": "Philippians",
+        "translated_name": "Filipenses",
+        "short_name": "Fil",
+        "abbreviation": "fp",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 50
+      },
+      {
+        "id": "COL",
+        "canonical_name": "Colossians",
+        "translated_name": "Colosenses",
+        "short_name": "Col",
+        "abbreviation": "cl",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 51
+      },
+      {
+        "id": "1TH",
+        "canonical_name": "1 Thessalonians",
+        "translated_name": "1 Tesalonicenses",
+        "short_name": "1 Tes",
+        "abbreviation": "1ts",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 52
+      },
+      {
+        "id": "2TH",
+        "canonical_name": "2 Thessalonians",
+        "translated_name": "2 Tesalonicenses",
+        "short_name": "2 Tes",
+        "abbreviation": "2ts",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 53
+      },
+      {
+        "id": "1TI",
+        "canonical_name": "1 Timothy",
+        "translated_name": "1 Timoteo",
+        "short_name": "1 Tim",
+        "abbreviation": "1tm",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 54
+      },
+      {
+        "id": "2TI",
+        "canonical_name": "2 Timothy",
+        "translated_name": "2 Timoteo",
+        "short_name": "2 Tim",
+        "abbreviation": "2tm",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 55
+      },
+      {
+        "id": "TIT",
+        "canonical_name": "Titus",
+        "translated_name": "Tito",
+        "short_name": "Tit",
+        "abbreviation": "tt",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 56
+      },
+      {
+        "id": "PHM",
+        "canonical_name": "Philemon",
+        "translated_name": "Filemón",
+        "short_name": "Filem",
+        "abbreviation": "fm",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 57
+      },
+      {
+        "id": "HEB",
+        "canonical_name": "Hebrews",
+        "translated_name": "Hebreos",
+        "short_name": "Heb",
+        "abbreviation": "hb",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 58
+      },
+      {
+        "id": "JAS",
+        "canonical_name": "James",
+        "translated_name": "Santiago",
+        "short_name": "Sant",
+        "abbreviation": "tg",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 59
+      },
+      {
+        "id": "1PE",
+        "canonical_name": "1 Peter",
+        "translated_name": "1 Pedro",
+        "short_name": "1 Ped",
+        "abbreviation": "1pe",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 60
+      },
+      {
+        "id": "2PE",
+        "canonical_name": "2 Peter",
+        "translated_name": "2 Pedro",
+        "short_name": "2 Ped",
+        "abbreviation": "2pe",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 61
+      },
+      {
+        "id": "1JN",
+        "canonical_name": "1 John",
+        "translated_name": "1 Juan",
+        "short_name": "1 Juan",
+        "abbreviation": "1jo",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 62
+      },
+      {
+        "id": "2JN",
+        "canonical_name": "2 John",
+        "translated_name": "2 Juan",
+        "short_name": "2 Juan",
+        "abbreviation": "2jo",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 63
+      },
+      {
+        "id": "3JN",
+        "canonical_name": "3 John",
+        "translated_name": "3 Juan",
+        "short_name": "3 Juan",
+        "abbreviation": "3jo",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 64
+      },
+      {
+        "id": "JUD",
+        "canonical_name": "Jude",
+        "translated_name": "Judas",
+        "short_name": "Jud",
+        "abbreviation": "jd",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 65
+      },
+      {
+        "id": "REV",
+        "canonical_name": "Revelation",
+        "translated_name": "Apocalipsis",
+        "short_name": "Apoc",
+        "abbreviation": "ap",
+        "testament_canonical": "New Testament",
+        "testament_translated": "Nuevo Testamento",
+        "canonical_order": 66
+      }
+    ]
+  }
+}
