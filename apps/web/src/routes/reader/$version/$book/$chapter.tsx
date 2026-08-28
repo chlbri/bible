@@ -9,7 +9,7 @@ import {
 import { createFileRoute, useNavigate } from '@tanstack/solid-router';
 import { createResource, For, Show, onMount, onCleanup } from 'solid-js';
 
-import { isSearchOpen } from '../../../../store.js';
+import { isSearchOpen } from '../../../../store';
 
 export const Route = createFileRoute('/reader/$version/$book/$chapter')({
   component: ReaderPage,
@@ -126,7 +126,7 @@ function ReaderPage() {
               {localizedBookName()} {data().chapter}
             </h1>
 
-            <div class='leading-[2]'>
+            <div class='leading-loose'>
               <For each={data().verses}>
                 {v => (
                   <span class={verseClass}>
