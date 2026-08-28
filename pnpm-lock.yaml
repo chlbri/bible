@@ -62,6 +62,12 @@ importers:
       '@bemedev/bible':
         specifier: workspace:*
         version: link:../../packages/bible
+      '@orama/orama':
+        specifier: ^3.1.18
+        version: 3.1.18
+      '@orama/stemmers':
+        specifier: ^3.1.18
+        version: 3.1.18
       '@tanstack/solid-router':
         specifier: 1.170.30
         version: 1.170.30(solid-js@1.9.15)
@@ -95,6 +101,13 @@ importers:
         version: 2.11.14(solid-js@1.9.15)(supports-color@10.2.2)(vite@8.2.2(@types/node@26.4.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.12))
 
   packages/bible:
+    dependencies:
+      '@orama/orama':
+        specifier: ^3.1.18
+        version: 3.1.18
+      '@orama/stemmers':
+        specifier: ^3.1.18
+        version: 3.1.18
     devDependencies:
       '@bemedev/dev-utils':
         specifier: ^1.5.0
@@ -120,6 +133,12 @@ importers:
       '@bemedev/bible':
         specifier: workspace:*
         version: link:../bible
+      '@orama/orama':
+        specifier: ^3.1.18
+        version: 3.1.18
+      '@orama/stemmers':
+        specifier: ^3.1.18
+        version: 3.1.18
     devDependencies:
       '@types/node':
         specifier: ^26.4.0
@@ -633,6 +652,14 @@ packages:
   '@oozcitak/util@10.0.0':
     resolution: {integrity: sha512-hAX0pT/73190NLqBPPWSdBVGtbY6VOhWYK3qqHqtXQ1gK7kS2yz4+ivsN07hpJ6I3aeMtKP6J6npsEKOAzuTLA==}
     engines: {node: '>=20.0'}
+
+  '@orama/orama@3.1.18':
+    resolution: {integrity: sha512-a61ljmRVVyG5MC/698C8/FfFDw5a8LOIvyOLW5fztgUXqUpc1jOfQzOitSCbge657OgXXThmY3Tk8fpiDb4UcA==}
+    engines: {node: '>= 20.0.0'}
+
+  '@orama/stemmers@3.1.18':
+    resolution: {integrity: sha512-xXs5fpiUvBs4jJZtnayJmUSomdxxiwwwvTbAzPHSyI6geLM7bxXHgpVlYz4JeMBycHX8bHF7j9m7F35BxhuZ8g==}
+    engines: {node: '>= 20.0.0'}
 
   '@oxc-project/types@0.147.0':
     resolution: {integrity: sha512-IJ3s6ltHLp45S0bh7phkX+gJO7A1Wuz2EaqpAhb8WjqDwbzMiWKHhyyT42tskaWjEYXtHtVCPpnBJVT9+dcRLg==}
@@ -4500,6 +4527,10 @@ snapshots:
       '@oozcitak/util': 10.0.0
 
   '@oozcitak/util@10.0.0': {}
+
+  '@orama/orama@3.1.18': {}
+
+  '@orama/stemmers@3.1.18': {}
 
   '@oxc-project/types@0.147.0': {}
 

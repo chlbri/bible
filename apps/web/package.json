@@ -15,7 +15,9 @@
     "@tauri-apps/api": "^2.11.1",
     "nitro": "3.0.260610-beta",
     "solid-js": "^1.9.15",
-    "vinxi": "0.5.11"
+    "vinxi": "0.5.11",
+    "@orama/orama": "^3.1.18",
+    "@orama/stemmers": "^3.1.18"
   },
   "devDependencies": {
     "@types/node": "^26.4.0",

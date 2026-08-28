@@ -1,7 +1,7 @@
 import { createSignal, createEffect, For, Show } from 'solid-js';
-import { isSearchOpen, setIsSearchOpen, currentVersion } from '../store.js';
+import { isSearchOpen, setIsSearchOpen, currentVersion, currentLanguage, t } from '../store.js';
 import { useNavigate } from '@tanstack/solid-router';
-import { tauriBridge } from '@bemedev/bible';
+import { getBookById, searchVerses } from '@bemedev/bible';
 
 export function SearchModal() {
   const [query, setQuery] = createSignal('');
@@ -23,23 +23,12 @@ export function SearchModal() {
     debounceTimer = setTimeout(async () => {
       setIsLoading(true);
       try {
-        if (tauriBridge.isTauri()) {
-          if (mode() === 'semantic') {
-            const res = await tauriBridge.searchSemantic(currentVersion(), q, 15);
-            setResults(res);
-          } else {
-            const res = await tauriBridge.searchKeywords(currentVersion(), q, 15);
-            setResults(res);
-          }
-        } else {
-          // Web preview mock results
-          setResults([
-            { id: '1', book_id: 'GENESIS', chapter: 1, verse: 1, text: 'Au commencement, Dieu créa les cieux et la terre.', similarity: 0.85 },
-            { id: '2', book_id: 'JOHN', chapter: 1, verse: 1, text: 'Au commencement était la Parole, et la Parole était avec Dieu...', similarity: 0.82 },
-          ]);
-        }
+        // Pure client-side in-memory Orama search
+        const res = await searchVerses(currentVersion(), q, 30);
+        setResults(res || []);
       } catch (err) {
         console.error('Search error:', err);
+        setResults([]);
       } finally {
         setIsLoading(false);
       }
@@ -58,6 +47,11 @@ export function SearchModal() {
     });
   };
 
+  const getLocalizedBookName = (bookId: string) => {
+    const book = getBookById(bookId, currentLanguage());
+    return book?.translatedName || bookId;
+  };
+
   return (
     <Show when={isSearchOpen()}>
       <div class="modal-overlay" onClick={() => setIsSearchOpen(false)}>
@@ -66,7 +60,7 @@ export function SearchModal() {
             <input
               type="text"
               class="search-input"
-              placeholder="Search by meaning or keywords..."
+              placeholder={t('search_placeholder', 'Search by reference (e.g. Jean 3:16) or keywords...')}
               value={query()}
               onInput={(e) => setQuery(e.currentTarget.value)}
               autofocus
@@ -80,7 +74,7 @@ export function SearchModal() {
                 }}
                 onClick={() => setMode('semantic')}
               >
-                Meaning
+                {t('meaning', 'Meaning')}
               </button>
               <button
                 class="btn"
@@ -90,7 +84,7 @@ export function SearchModal() {
                 }}
                 onClick={() => setMode('keyword')}
               >
-                Keyword
+                {t('keyword', 'Keyword')}
               </button>
             </div>
           </div>
@@ -98,13 +92,13 @@ export function SearchModal() {
           <div style={{ 'max-height': '400px', 'overflow-y': 'auto', padding: '12px' }}>
             <Show when={isLoading()}>
               <div style={{ 'text-align': 'center', padding: '20px', opacity: 0.6 }}>
-                Searching across 31,102 verses...
+                {t('searching', 'Searching across 31,102 verses...')}
               </div>
             </Show>
 
             <Show when={!isLoading() && results().length === 0 && query().length >= 2}>
               <div style={{ 'text-align': 'center', padding: '20px', opacity: 0.6 }}>
-                No matching verses found.
+                {t('no_results', 'No matching verses found.')}
               </div>
             </Show>
 
@@ -116,7 +110,9 @@ export function SearchModal() {
                   onClick={() => handleSelectVerse(item.book_id, item.chapter)}
                 >
                   <div style={{ 'font-weight': 'bold', 'font-size': '0.9em', display: 'flex', 'justify-content': 'space-between' }}>
-                    <span>{item.book_id} {item.chapter}:{item.verse}</span>
+                    <span>
+                      {getLocalizedBookName(item.book_id)} {item.chapter}:{item.verse}
+                    </span>
                     <Show when={item.similarity}>
                       <span style={{ color: 'var(--accent-color)' }}>
                         {(item.similarity * 100).toFixed(0)}% match

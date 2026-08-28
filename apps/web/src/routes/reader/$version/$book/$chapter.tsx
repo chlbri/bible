@@ -1,8 +1,8 @@
-import { tauriBridge } from '@bemedev/bible';
+import { getAdjacentChapter, getBookById, getChapterFromData } from '@bemedev/bible';
 import { createFileRoute, useNavigate } from '@tanstack/solid-router';
 import { createResource, For, Show } from 'solid-js';
 
-import { fetchChapterServerFn } from '../../../../server/db.js';
+import { currentLanguage, t } from '../../../../store.js';
 
 export const Route = createFileRoute('/reader/$version/$book/$chapter')({
   component: ReaderPage,
@@ -20,65 +20,61 @@ function ReaderPage() {
       chapter: parseInt(params().chapter, 10),
     }),
     async ({ version, book, chapter }) => {
-      // 1. If running in Tauri Desktop, use Native Rust IPC
-      if (tauriBridge.isTauri()) {
-        try {
-          return await tauriBridge.getChapter(version, book, chapter);
-        } catch (e) {
-          console.warn('Tauri IPC failed, falling back to server function:', e);
-        }
-      }
-
-      // 2. If running in Web Browser / SSR, query SQLite via TanStack Server Function
-      try {
-        const serverData = await fetchChapterServerFn({
-          data: { version, book, chapter },
-        });
-        if (serverData) return serverData;
-      } catch (e) {
-        console.error('Server function error:', e);
-      }
-
-      return null;
+      // Pure client-side retrieval from Bible JSON data
+      return await getChapterFromData(version, book, chapter);
     },
   );
 
-  const goToChapter = (delta: number) => {
-    const currentChap = parseInt(params().chapter, 10);
-    const nextChap = Math.max(1, currentChap + delta);
-    navigate({
-      to: '/reader/$version/$book/$chapter',
-      params: {
-        version: params().version,
-        book: params().book,
-        chapter: String(nextChap),
-      },
-    });
+  const currentChapterNum = () => parseInt(params().chapter, 10) || 1;
+
+  const prevTarget = () =>
+    getAdjacentChapter(params().book, currentChapterNum(), -1);
+
+  const nextTarget = () =>
+    getAdjacentChapter(params().book, currentChapterNum(), 1);
+
+  const goToAdjacentChapter = (delta: number) => {
+    const target = getAdjacentChapter(params().book, currentChapterNum(), delta);
+    if (target) {
+      navigate({
+        to: '/reader/$version/$book/$chapter',
+        params: {
+          version: params().version,
+          book: target.bookId,
+          chapter: String(target.chapter),
+        },
+      });
+    }
+  };
+
+  const localizedBookName = () => {
+    const book = getBookById(params().book, currentLanguage());
+    return book?.translatedName || params().book;
   };
 
   return (
-    <div class='reader-container'>
+    <div class="reader-container">
       <Show when={chapterData.loading}>
         <div
           style={{ 'text-align': 'center', 'padding-top': '100px', opacity: 0.5 }}
         >
-          Opening chapter...
+          {t('opening_chapter', 'Opening chapter...')}
         </div>
       </Show>
 
       <Show when={chapterData()}>
-        {data => (
+        {(data) => (
           <div>
-            <h1 class='chapter-title'>
-              {data().book_id} {data().chapter}
+            <h1 class="chapter-title">
+              {localizedBookName()} {data().chapter}
             </h1>
 
-            <div class='verses-content'>
+            <div class="verses-content">
               <For each={data().verses}>
-                {v => (
-                  <span class='verse-item'>
-                    <span class='verse-number'>{v.verse}</span>
-                    <span class='verse-text'>{v.text} </span>
+                {(v) => (
+                  <span class="verse-item">
+                    <span class="verse-number">{v.verse}</span>
+                    <span class="verse-text">{v.text} </span>
                   </span>
                 )}
               </For>
@@ -87,15 +83,27 @@ function ReaderPage() {
         )}
       </Show>
 
-      <footer class='reader-footer'>
-        <button class='btn' onClick={() => goToChapter(-1)}>
-          ← Previous
+      <footer class="reader-footer">
+        <button
+          class="btn"
+          disabled={!prevTarget()}
+          style={{ opacity: prevTarget() ? 1 : 0.4, cursor: prevTarget() ? 'pointer' : 'not-allowed' }}
+          onClick={() => goToAdjacentChapter(-1)}
+        >
+          ← {t('previous', 'Previous')}
         </button>
+
         <span style={{ opacity: 0.7 }}>
-          {params().book} {params().chapter} ({params().version.toUpperCase()})
+          {localizedBookName()} {params().chapter} ({params().version.toUpperCase()})
         </span>
-        <button class='btn' onClick={() => goToChapter(1)}>
-          Next →
+
+        <button
+          class="btn"
+          disabled={!nextTarget()}
+          style={{ opacity: nextTarget() ? 1 : 0.4, cursor: nextTarget() ? 'pointer' : 'not-allowed' }}
+          onClick={() => goToAdjacentChapter(1)}
+        >
+          {t('next', 'Next')} →
         </button>
       </footer>
     </div>

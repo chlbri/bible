@@ -35,21 +35,71 @@ pub fn search_keywords(
     db: State<'_, DatabaseState>,
 ) -> Result<Vec<KeywordResultDto>, String> {
     let limit_val = limit.unwrap_or(20);
-    let conn = db.semantic_conn.lock().map_err(|e| e.to_string())?;
+    let trimmed = query.trim();
+    if trimmed.is_empty() {
+        return Ok(Vec::new());
+    }
 
-    let mut stmt = conn
+    // 1. Try SQLite FTS5 in semantic_conn
+    if let Ok(conn) = db.semantic_conn.lock() {
+        // Sanitize for FTS5: split words, wrap in quotes with prefix wildcard
+        let fts_query = trimmed
+            .replace(['"', '\'', '*', '^', ':'], " ")
+            .split_whitespace()
+            .map(|word| format!("\"{}\"*", word))
+            .collect::<Vec<_>>()
+            .join(" ");
+
+        if !fts_query.is_empty() {
+            if let Ok(mut stmt) = conn.prepare(
+                "SELECT id, book_id, chapter, verse, text, rank 
+                 FROM verses_fts 
+                 WHERE version_id = ?1 AND verses_fts MATCH ?2 
+                 ORDER BY rank ASC 
+                 LIMIT ?3",
+            ) {
+                if let Ok(rows) = stmt.query_map(
+                    [&version_id, &fts_query, &limit_val.to_string()],
+                    |row| {
+                        Ok(KeywordResultDto {
+                            id: row.get(0)?,
+                            book_id: row.get(1)?,
+                            chapter: row.get(2)?,
+                            verse: row.get(3)?,
+                            text: row.get(4)?,
+                            rank: row.get(5)?,
+                        })
+                    },
+                ) {
+                    let mut results = Vec::new();
+                    for r in rows.flatten() {
+                        results.push(r);
+                    }
+                    if !results.is_empty() {
+                        return Ok(results);
+                    }
+                }
+            }
+        }
+    }
+
+    // 2. Fallback: Search reader_conn with LIKE
+    let reader_conn = db.reader_conn.lock().map_err(|e| e.to_string())?;
+    let like_pattern = format!("%{}%", trimmed);
+    let mut stmt = reader_conn
         .prepare(
-            "SELECT id, book_id, chapter, verse, text, rank 
-             FROM verses_fts 
-             WHERE version_id = ?1 AND verses_fts MATCH ?2 
-             ORDER BY rank ASC 
+            "SELECT version_id || '_' || book_id || '_' || chapter || '_' || verse AS id, 
+                    book_id, chapter, verse, text 
+             FROM verses 
+             WHERE version_id = ?1 AND text LIKE ?2 
+             ORDER BY chapter ASC, verse ASC 
              LIMIT ?3",
         )
         .map_err(|e| e.to_string())?;
 
     let rows = stmt
         .query_map(
-            [&version_id, &query, &limit_val.to_string()],
+            [&version_id, &like_pattern, &limit_val.to_string()],
             |row| {
                 Ok(KeywordResultDto {
                     id: row.get(0)?,
@@ -57,15 +107,15 @@ pub fn search_keywords(
                     chapter: row.get(2)?,
                     verse: row.get(3)?,
                     text: row.get(4)?,
-                    rank: row.get(5)?,
+                    rank: 0.0,
                 })
             },
         )
         .map_err(|e| e.to_string())?;
 
     let mut results = Vec::new();
-    for r in rows {
-        results.push(r.map_err(|e| e.to_string())?);
+    for r in rows.flatten() {
+        results.push(r);
     }
     Ok(results)
 }
