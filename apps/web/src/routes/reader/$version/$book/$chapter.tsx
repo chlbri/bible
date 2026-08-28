@@ -108,6 +108,9 @@ function ReaderPage() {
   const navBtnClass =
     'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-[var(--border-color)] bg-transparent text-[var(--text-color)] text-sm cursor-pointer hover:bg-black/5 dark:hover:bg-white/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed';
 
+  const verseClass =
+    'relative inline px-1.5 py-0.5 mr-1 rounded box-decoration-clone cursor-pointer transition-all duration-200 hover:bg-(--verse-highlight-bg) hover:shadow-[0_0_0_2px_var(--verse-highlight-bg)]';
+
   return (
     <div class='mx-auto max-w-5xl px-6 pt-20 pb-28'>
       <Show when={chapterData.loading}>
@@ -123,10 +126,10 @@ function ReaderPage() {
               {localizedBookName()} {data().chapter}
             </h1>
 
-            <div class='space-y-3'>
+            <div class='leading-[2]'>
               <For each={data().verses}>
                 {v => (
-                  <span class='relative mr-1.5 mb-2 inline-block cursor-pointer rounded px-1.5 py-0.5 transition-colors hover:bg-black/5 dark:hover:bg-white/10'>
+                  <span class={verseClass}>
                     <span class='mr-1.5 align-super text-xs font-bold text-(--verse-num-color) select-none'>
                       {v.verse}
                     </span>

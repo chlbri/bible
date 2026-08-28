@@ -5,6 +5,7 @@
   --text-color: #382c1e;
   --accent-color: #8b5cf6;
   --verse-num-color: #8c7b69;
+  --verse-highlight-bg: rgba(234, 179, 8, 0.22);
   --header-bg: rgba(251, 240, 217, 0.9);
   --border-color: #e5d5be;
   --font-family: 'Georgia', 'Merriweather', serif;
@@ -17,6 +18,7 @@
   --text-color: #1a1a1a;
   --accent-color: #3b82f6;
   --verse-num-color: #9ca3af;
+  --verse-highlight-bg: rgba(250, 204, 21, 0.28);
   --header-bg: rgba(255, 255, 255, 0.95);
   --border-color: #e5e7eb;
 }
@@ -26,6 +28,7 @@
   --text-color: #382c1e;
   --accent-color: #b45309;
   --verse-num-color: #927e69;
+  --verse-highlight-bg: rgba(217, 119, 6, 0.18);
   --header-bg: rgba(251, 240, 217, 0.95);
   --border-color: #e2d1b8;
 }
@@ -35,6 +38,7 @@
   --text-color: #f4f4f5;
   --accent-color: #a855f7;
   --verse-num-color: #71717a;
+  --verse-highlight-bg: rgba(250, 204, 21, 0.16);
   --header-bg: rgba(24, 24, 27, 0.95);
   --border-color: #27272a;
 }
@@ -44,6 +48,7 @@
   --text-color: #e4e4e7;
   --accent-color: #38bdf8;
   --verse-num-color: #52525b;
+  --verse-highlight-bg: rgba(250, 204, 21, 0.18);
   --header-bg: rgba(0, 0, 0, 0.95);
   --border-color: #18181b;
 }
@@ -55,6 +60,7 @@
   --text-color: #1e293b;
   --accent-color: #2563eb;
   --verse-num-color: #64748b;
+  --verse-highlight-bg: rgba(59, 130, 246, 0.18);
   --header-bg: rgba(238, 244, 249, 0.95);
   --border-color: #cbd5e1;
 }
@@ -66,15 +72,8 @@
   --text-color: #212529;
   --accent-color: #4f46e5;
   --verse-num-color: #868e96;
+  --verse-highlight-bg: rgba(250, 204, 21, 0.26);
   --header-bg: rgba(241, 243, 245, 0.95);
   --border-color: #dee2e6;
 }
 
-/* @theme {
-  --color-reader-bg: var(--bg-color);
-  --color-reader-text: var(--text-color);
-  --color-reader-accent: var(--accent-color);
-  --color-reader-verse-num: var(--verse-num-color);
-  --color-reader-header: var(--header-bg);
-  --color-reader-border: var(--border-color);
-} */
