@@ -4,21 +4,70 @@ import {
   translateToken,
   getVersionsForLanguage,
   getLanguageForVersion,
+  getDefaultVersionForLanguage,
 } from '@bemedev/bible';
 
-export type ReaderTheme = 'sepia' | 'light' | 'dark' | 'oled';
+export type ReaderTheme =
+  | 'sepia'
+  | 'light'
+  | 'dark'
+  | 'oled'
+  | 'soft-blue'
+  | 'lightgray';
 
-export const [currentLanguage, setCurrentLanguage] = createSignal<SupportedLanguage>('fr');
-export const [currentVersion, setCurrentVersion] = createSignal<string>('fr_lsg');
+const LANG_STORAGE_KEY = 'bible_language';
+
+export function getInitialLanguage(): SupportedLanguage {
+  if (typeof window !== 'undefined' && window.localStorage) {
+    try {
+      const stored = window.localStorage.getItem(LANG_STORAGE_KEY);
+      if (
+        stored === 'en' ||
+        stored === 'fr' ||
+        stored === 'es' ||
+        stored === 'de' ||
+        stored === 'pt'
+      ) {
+        return stored;
+      }
+    } catch {
+      // LocalStorage might be disabled or unavailable
+    }
+  }
+  return 'en';
+}
+
+export function persistLanguage(lang: SupportedLanguage) {
+  if (typeof window !== 'undefined' && window.localStorage) {
+    try {
+      window.localStorage.setItem(LANG_STORAGE_KEY, lang);
+    } catch {
+      // LocalStorage might be disabled or unavailable
+    }
+  }
+}
+
+const initialLang = getInitialLanguage();
+const initialVer = getDefaultVersionForLanguage(initialLang);
+
+export const [currentLanguage, _setCurrentLanguage] =
+  createSignal<SupportedLanguage>(initialLang);
+export const [currentVersion, setCurrentVersion] =
+  createSignal<string>(initialVer);
 export const [fontSize, setFontSize] = createSignal<number>(19);
 export const [theme, setTheme] = createSignal<ReaderTheme>('sepia');
 export const [isSearchOpen, setIsSearchOpen] = createSignal<boolean>(false);
 export const [isSettingsOpen, setIsSettingsOpen] = createSignal<boolean>(false);
 
+export function setCurrentLanguage(lang: SupportedLanguage) {
+  _setCurrentLanguage(lang);
+  persistLanguage(lang);
+}
+
 export function setLanguageAndDefaultVersion(lang: SupportedLanguage) {
   setCurrentLanguage(lang);
   const versions = getVersionsForLanguage(lang);
-  if (versions.length > 0 && !versions.some((v) => v.id === currentVersion())) {
+  if (versions.length > 0 && !versions.some(v => v.id === currentVersion())) {
     setCurrentVersion(versions[0].id);
   }
 }
@@ -36,7 +85,14 @@ export function t(key: string, fallback?: string): string {
 }
 
 export function cycleTheme() {
-  const themes: ReaderTheme[] = ['sepia', 'light', 'dark', 'oled'];
+  const themes: ReaderTheme[] = [
+    'sepia',
+    'light',
+    'dark',
+    'oled',
+    'soft-blue',
+    'lightgray',
+  ];
   const nextIdx = (themes.indexOf(theme()) + 1) % themes.length;
   setTheme(themes[nextIdx]);
   if (typeof document !== 'undefined') {

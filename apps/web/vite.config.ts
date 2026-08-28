@@ -1,3 +1,4 @@
+import tailwindcss from '@tailwindcss/vite';
 import { tanstackStart } from '@tanstack/solid-start/plugin/vite';
 import { nitro } from 'nitro/vite';
 import { defineConfig } from 'vite';
@@ -15,8 +16,14 @@ export default defineConfig({
     },
   },
   plugins: [
+    tailwindcss(),
     tanstackStart({}),
-    nitro({}),
+    nitro({
+      prerender: {
+        routes: ['/'],
+        crawlLinks: true,
+      },
+    }),
     viteSolid({ ssr: true, extensions: ['.js', '.ts', '.jsx', '.tsx'] }),
   ],
 });

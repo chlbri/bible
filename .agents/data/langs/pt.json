@@ -15,7 +15,20 @@
     "language": "Idioma",
     "translation": "Tradução",
     "abbreviation": "Abreviatura",
-    "table_of_contents": "Índice"
+    "table_of_contents": "Índice",
+    "search": "Pesquisar",
+    "previous": "Anterior",
+    "next": "Próximo",
+    "meaning": "Significado",
+    "keyword": "Palavra-chave",
+    "search_placeholder": "Pesquisar por referência (ex: João 3:16) ou palavras-chave...",
+    "searching": "Pesquisando em 31.102 versículos...",
+    "no_results": "Nenhum versículo correspondente encontrado.",
+    "opening_chapter": "Abrindo capítulo...",
+    "decrease_font_size": "Diminuir tamanho da fonte",
+    "increase_font_size": "Aumentar tamanho da fonte",
+    "change_theme": "Mudar tema",
+    "match": "correspondência"
   },
   "testaments": {
     "Old Testament": "Antigo Testamento",

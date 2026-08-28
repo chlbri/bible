@@ -15,7 +15,20 @@
     "language": "Langue",
     "translation": "Traduction",
     "abbreviation": "Abréviation",
-    "table_of_contents": "Table des matières"
+    "table_of_contents": "Table des matières",
+    "search": "Rechercher",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "meaning": "Sens",
+    "keyword": "Mot-clé",
+    "search_placeholder": "Rechercher par référence (ex: Jean 3:16) ou mots-clés...",
+    "searching": "Recherche parmi 31 102 versets...",
+    "no_results": "Aucun verset correspondant trouvé.",
+    "opening_chapter": "Ouverture du chapitre...",
+    "decrease_font_size": "Diminuer la taille de la police",
+    "increase_font_size": "Augmenter la taille de la police",
+    "change_theme": "Changer de thème",
+    "match": "correspondance"
   },
   "testaments": {
     "Old Testament": "Ancien Testament",

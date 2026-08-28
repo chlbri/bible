@@ -496,22 +496,22 @@ export function getLanguages(): { code: SupportedLanguage; name: string }[] {
   ];
 }
 
-export function getTokens(lang: SupportedLanguage = 'fr'): Record<string, string> {
-  const file = LANGS_DATA[lang] || LANGS_DATA.fr;
+export function getTokens(lang: SupportedLanguage = 'en'): Record<string, string> {
+  const file = LANGS_DATA[lang] || LANGS_DATA.en;
   return file.tokens || {};
 }
 
 export function translateToken(
   tokenKey: string,
-  lang: SupportedLanguage = 'fr',
+  lang: SupportedLanguage = 'en',
   fallback?: string,
 ): string {
   const tokens = getTokens(lang);
   return tokens[tokenKey] || fallback || tokenKey;
 }
 
-export function getBooksList(lang: SupportedLanguage = 'fr'): LocalizedBook[] {
-  const file = LANGS_DATA[lang] || LANGS_DATA.fr;
+export function getBooksList(lang: SupportedLanguage = 'en'): LocalizedBook[] {
+  const file = LANGS_DATA[lang] || LANGS_DATA.en;
   return CANONICAL_BOOKS.map(meta => {
     const raw: RawBookData | undefined =
       file.books_by_canonical_name[meta.canonicalName];
@@ -527,12 +527,12 @@ export function getBooksList(lang: SupportedLanguage = 'fr'): LocalizedBook[] {
 
 export function getBookById(
   bookId: string,
-  lang: SupportedLanguage = 'fr',
+  lang: SupportedLanguage = 'en',
 ): LocalizedBook | undefined {
   const normalizedId = bookId.toUpperCase().replace(/\s+/g, '_');
   const meta = CANONICAL_BOOKS.find(b => b.bookId === normalizedId);
   if (!meta) return undefined;
-  const file = LANGS_DATA[lang] || LANGS_DATA.fr;
+  const file = LANGS_DATA[lang] || LANGS_DATA.en;
   const raw: RawBookData | undefined =
     file.books_by_canonical_name[meta.canonicalName];
   return {
@@ -584,4 +584,24 @@ export function getAdjacentChapter(
   }
 
   return { bookId: currentBook.bookId, chapter: currentChapter };
+}
+
+/**
+ * Calculates adjacent book navigation. - When delta is +1, returns next canonical
+ * book (or null if at end of Revelation). - When delta is -1, returns previous
+ * canonical book (or null if at beginning of Genesis).
+ */
+export function getAdjacentBook(
+  bookId: string,
+  delta: number,
+): CanonicalBookMeta | null {
+  const normalizedId = bookId.toUpperCase().replace(/\s+/g, '_');
+  const bookIndex = CANONICAL_BOOKS.findIndex(b => b.bookId === normalizedId);
+  if (bookIndex === -1) return null;
+
+  const targetIndex = bookIndex + delta;
+  if (targetIndex >= 0 && targetIndex < CANONICAL_BOOKS.length) {
+    return CANONICAL_BOOKS[targetIndex];
+  }
+  return null;
 }

@@ -15,7 +15,20 @@
     "language": "Language",
     "translation": "Translation",
     "abbreviation": "Abbreviation",
-    "table_of_contents": "Table of Contents"
+    "table_of_contents": "Table of Contents",
+    "search": "Search",
+    "previous": "Previous",
+    "next": "Next",
+    "meaning": "Meaning",
+    "keyword": "Keyword",
+    "search_placeholder": "Search by reference (e.g. John 3:16) or keywords...",
+    "searching": "Searching across 31,102 verses...",
+    "no_results": "No matching verses found.",
+    "opening_chapter": "Opening chapter...",
+    "decrease_font_size": "Decrease font size",
+    "increase_font_size": "Increase font size",
+    "change_theme": "Change theme",
+    "match": "match"
   },
   "testaments": {
     "Old Testament": "Old Testament",

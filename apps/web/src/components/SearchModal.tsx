@@ -1,7 +1,13 @@
-import { createSignal, createEffect, For, Show } from 'solid-js';
-import { isSearchOpen, setIsSearchOpen, currentVersion, currentLanguage, t } from '../store.js';
+import {
+  getBookById,
+  searchVerses,
+  getLanguageForVersion,
+  translateToken,
+} from '@bemedev/bible';
 import { useNavigate } from '@tanstack/solid-router';
-import { getBookById, searchVerses } from '@bemedev/bible';
+import { createSignal, createEffect, onMount, onCleanup, For, Show } from 'solid-js';
+
+import { isSearchOpen, setIsSearchOpen, currentVersion } from '../store.js';
 
 export function SearchModal() {
   const [query, setQuery] = createSignal('');
@@ -11,6 +17,19 @@ export function SearchModal() {
   const navigate = useNavigate();
 
   let debounceTimer: any;
+
+  onMount(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isSearchOpen()) {
+        e.preventDefault();
+        setIsSearchOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    onCleanup(() => {
+      window.removeEventListener('keydown', handleKeyDown);
+    });
+  });
 
   createEffect(() => {
     const q = query().trim();
@@ -39,87 +58,108 @@ export function SearchModal() {
     setIsSearchOpen(false);
     navigate({
       to: '/reader/$version/$book/$chapter',
-      params: {
-        version: currentVersion(),
-        book: bookId,
-        chapter: String(chapter),
-      },
+      params: { version: currentVersion(), book: bookId, chapter: String(chapter) },
     });
   };
 
+  const modalLang = () => getLanguageForVersion(currentVersion());
+
   const getLocalizedBookName = (bookId: string) => {
-    const book = getBookById(bookId, currentLanguage());
+    const book = getBookById(bookId, modalLang());
     return book?.translatedName || bookId;
   };
 
   return (
     <Show when={isSearchOpen()}>
-      <div class="modal-overlay" onClick={() => setIsSearchOpen(false)}>
-        <div class="modal-card" onClick={(e) => e.stopPropagation()}>
-          <div style={{ display: 'flex', 'border-bottom': '1px solid var(--border-color)' }}>
+      <div
+        class='fixed inset-0 z-50 flex items-start justify-center bg-black/60 px-4 pt-20 backdrop-blur-xs'
+        onClick={() => setIsSearchOpen(false)}
+      >
+        <div
+          class='w-full max-w-[640px] overflow-hidden rounded-xl border border-(--border-color) bg-(--bg-color) text-(--text-color) shadow-2xl'
+          onClick={e => e.stopPropagation()}
+        >
+          <div class='flex border-b border-(--border-color) px-3'>
             <input
-              type="text"
-              class="search-input"
-              placeholder={t('search_placeholder', 'Search by reference (e.g. Jean 3:16) or keywords...')}
+              type='text'
+              class='w-full border-none bg-transparent px-4.5 py-3.5 text-lg text-(--text-color) outline-none'
+              placeholder={translateToken(
+                'search_placeholder',
+                modalLang(),
+                'Search by reference (e.g. Jean 3:16) or keywords...',
+              )}
               value={query()}
-              onInput={(e) => setQuery(e.currentTarget.value)}
+              onInput={e => setQuery(e.currentTarget.value)}
               autofocus
             />
-            <div style={{ display: 'flex', 'align-items': 'center', padding: '0 12px', gap: '6px' }}>
+            <div class='flex items-center gap-1.5 px-3'>
               <button
-                class="btn"
+                class='inline-flex min-w-max cursor-pointer items-center gap-1 rounded-md border border-(--border-color) px-3 py-1.5 text-sm transition-colors'
                 style={{
-                  'background-color': mode() === 'semantic' ? 'var(--accent-color)' : 'transparent',
+                  'background-color':
+                    mode() === 'semantic' ? 'var(--accent-color)' : 'transparent',
                   color: mode() === 'semantic' ? '#ffffff' : 'var(--text-color)',
                 }}
                 onClick={() => setMode('semantic')}
               >
-                {t('meaning', 'Meaning')}
+                {translateToken('meaning', modalLang(), 'Meaning')}
               </button>
               <button
-                class="btn"
+                class='inline-flex min-w-max cursor-pointer items-center gap-1 rounded-md border border-(--border-color) px-3 py-1.5 text-sm transition-colors'
                 style={{
-                  'background-color': mode() === 'keyword' ? 'var(--accent-color)' : 'transparent',
+                  'background-color':
+                    mode() === 'keyword' ? 'var(--accent-color)' : 'transparent',
                   color: mode() === 'keyword' ? '#ffffff' : 'var(--text-color)',
                 }}
                 onClick={() => setMode('keyword')}
               >
-                {t('keyword', 'Keyword')}
+                {translateToken('keyword', modalLang(), 'Keyword')}
               </button>
             </div>
           </div>
 
-          <div style={{ 'max-height': '400px', 'overflow-y': 'auto', padding: '12px' }}>
+          <div class='max-h-[400px] overflow-y-auto p-3'>
             <Show when={isLoading()}>
-              <div style={{ 'text-align': 'center', padding: '20px', opacity: 0.6 }}>
-                {t('searching', 'Searching across 31,102 verses...')}
+              <div class='py-5 text-center opacity-60'>
+                {translateToken(
+                  'searching',
+                  modalLang(),
+                  'Searching across 31,102 verses...',
+                )}
               </div>
             </Show>
 
-            <Show when={!isLoading() && results().length === 0 && query().length >= 2}>
-              <div style={{ 'text-align': 'center', padding: '20px', opacity: 0.6 }}>
-                {t('no_results', 'No matching verses found.')}
+            <Show
+              when={!isLoading() && results().length === 0 && query().length >= 2}
+            >
+              <div class='py-5 text-center opacity-60'>
+                {translateToken(
+                  'no_results',
+                  modalLang(),
+                  'No matching verses found.',
+                )}
               </div>
             </Show>
 
             <For each={results()}>
-              {(item) => (
+              {item => (
                 <div
-                  class="verse-item"
-                  style={{ 'margin-bottom': '8px', padding: '8px', 'border-radius': '6px' }}
+                  class='mb-2 cursor-pointer rounded-md p-2.5 transition-colors hover:bg-black/5 dark:hover:bg-white/10'
                   onClick={() => handleSelectVerse(item.book_id, item.chapter)}
                 >
-                  <div style={{ 'font-weight': 'bold', 'font-size': '0.9em', display: 'flex', 'justify-content': 'space-between' }}>
+                  <div class='flex justify-between text-sm font-bold'>
                     <span>
-                      {getLocalizedBookName(item.book_id)} {item.chapter}:{item.verse}
+                      {getLocalizedBookName(item.book_id)} {item.chapter}:
+                      {item.verse}
                     </span>
                     <Show when={item.similarity}>
-                      <span style={{ color: 'var(--accent-color)' }}>
-                        {(item.similarity * 100).toFixed(0)}% match
+                      <span class='font-semibold text-(--accent-color)'>
+                        {(item.similarity * 100).toFixed(0)}%{' '}
+                        {translateToken('match', modalLang(), 'match')}
                       </span>
                     </Show>
                   </div>
-                  <div style={{ 'font-size': '0.95em', 'margin-top': '4px' }}>{item.text}</div>
+                  <div class='mt-1 text-sm'>{item.text}</div>
                 </div>
               )}
             </For>

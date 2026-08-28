@@ -15,7 +15,20 @@
     "language": "Sprache",
     "translation": "Übersetzung",
     "abbreviation": "Abkürzung",
-    "table_of_contents": "Inhaltsverzeichnis"
+    "table_of_contents": "Inhaltsverzeichnis",
+    "search": "Suche",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "meaning": "Bedeutung",
+    "keyword": "Stichwort",
+    "search_placeholder": "Suche nach Referenz (z.B. Johannes 3:16) oder Stichwörtern...",
+    "searching": "Suche in 31.102 Versen...",
+    "no_results": "Keine passenden Verse gefunden.",
+    "opening_chapter": "Kapitel wird geladen...",
+    "decrease_font_size": "Schriftgröße verkleinern",
+    "increase_font_size": "Schriftgröße vergrößern",
+    "change_theme": "Thema wechseln",
+    "match": "Treffer"
   },
   "testaments": {
     "Old Testament": "Altes Testament",

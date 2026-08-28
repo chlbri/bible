@@ -26,6 +26,14 @@ export interface LangTokenMap {
   next?: string;
   meaning?: string;
   keyword?: string;
+  search_placeholder?: string;
+  searching?: string;
+  no_results?: string;
+  opening_chapter?: string;
+  decrease_font_size?: string;
+  increase_font_size?: string;
+  change_theme?: string;
+  match?: string;
 }
 
 export interface RawBookData {
@@ -55,4 +63,3 @@ export const LANGS_DATA: Record<SupportedLanguage, RawLangFile> = {
   fr: fr as unknown as RawLangFile,
   pt: pt as unknown as RawLangFile,
 };
-

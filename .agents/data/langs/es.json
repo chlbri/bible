@@ -15,7 +15,20 @@
     "language": "Idioma",
     "translation": "Traducción",
     "abbreviation": "Abreviatura",
-    "table_of_contents": "Tabla de contenido"
+    "table_of_contents": "Tabla de contenido",
+    "search": "Buscar",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "meaning": "Significado",
+    "keyword": "Palabra clave",
+    "search_placeholder": "Buscar por referencia (ej. Juan 3:16) o palabras clave...",
+    "searching": "Buscando en 31.102 versículos...",
+    "no_results": "No se encontraron versículos coincidentes.",
+    "opening_chapter": "Abriendo capítulo...",
+    "decrease_font_size": "Disminuir el tamaño de fuente",
+    "increase_font_size": "Aumentar el tamaño de fuente",
+    "change_theme": "Cambiar tema",
+    "match": "coincidencia"
   },
   "testaments": {
     "Old Testament": "Antiguo Testamento",

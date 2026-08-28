@@ -10,9 +10,9 @@ export function isTauri(): boolean {
     typeof window !== 'undefined' &&
     Boolean(
       (window as any).__TAURI_INTERNALS__ ||
-        (window as any).__TAURI__ ||
-        (window as any).isTauri ||
-        (globalThis as any).isTauri,
+      (window as any).__TAURI__ ||
+      (window as any).isTauri ||
+      (globalThis as any).isTauri,
     )
   );
 }
@@ -44,11 +44,7 @@ export async function getChapter(
     throw new Error('Cannot invoke Tauri IPC on server');
   }
   const { invoke } = await import('@tauri-apps/api/core');
-  return invoke('get_chapter', {
-    version_id: versionId,
-    book_id: bookId,
-    chapter,
-  });
+  return invoke('get_chapter', { version_id: versionId, book_id: bookId, chapter });
 }
 
 export async function searchKeywords(
@@ -60,11 +56,7 @@ export async function searchKeywords(
     return [];
   }
   const { invoke } = await import('@tauri-apps/api/core');
-  return invoke('search_keywords', {
-    version_id: versionId,
-    query,
-    limit,
-  });
+  return invoke('search_keywords', { version_id: versionId, query, limit });
 }
 
 export async function searchSemantic(
@@ -76,9 +68,5 @@ export async function searchSemantic(
     return [];
   }
   const { invoke } = await import('@tauri-apps/api/core');
-  return invoke('search_semantic', {
-    version_id: versionId,
-    query,
-    limit,
-  });
+  return invoke('search_semantic', { version_id: versionId, query, limit });
 }

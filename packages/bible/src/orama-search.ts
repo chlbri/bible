@@ -1,9 +1,10 @@
 import { create, insertMultiple, search, type AnyOrama } from '@orama/orama';
-import { stemmer as frenchStemmer } from '@orama/stemmers/french';
 import { stemmer as englishStemmer } from '@orama/stemmers/english';
+import { stemmer as frenchStemmer } from '@orama/stemmers/french';
+
+import type { SupportedLanguage } from './langs-data.js';
 import { CANONICAL_BOOKS, getBooksList } from './langs.js';
 import { loadBibleData, getChapterFromData } from './reader.js';
-import type { SupportedLanguage } from './langs-data.js';
 
 export interface VerseDocument {
   id: string;
@@ -30,9 +31,7 @@ export interface OramaSearchResult {
 const oramaIndices = new Map<string, AnyOrama>();
 const buildingIndices = new Map<string, Promise<AnyOrama>>();
 
-/**
- * Removes accents and lowercases string for robust diacritic-insensitive matching.
- */
+/** Removes accents and lowercases string for robust diacritic-insensitive matching. */
 export function normalizeDiacritics(str: string): string {
   return str
     .normalize('NFD')
@@ -41,15 +40,18 @@ export function normalizeDiacritics(str: string): string {
 }
 
 /**
- * Parses a reference query like "Jean 3:16", "Genèse 1:1", "John 3 16", "1 Jean 1:9", "Psaume 23:1".
+ * Parses a reference query like "Jean 3:16", "Genèse 1:1", "John 3 16", "1 Jean
+ * 1:9", "Psaume 23:1".
  */
 export function parseBibleReference(
   query: string,
-  lang: SupportedLanguage = 'fr'
+  lang: SupportedLanguage = 'fr',
 ): { bookId: string; chapter: number; verse?: number } | null {
   const q = query.trim();
   // Regex matching: (optional number 1-3) (Book Name) (chapter) [: ]? (optional verse)
-  const match = q.match(/^((?:[1-3]\s+)?[a-zA-Z\u00C0-\u017F\s-]+?)\s+(\d+)(?:[:\s](\d+))?$/i);
+  const match = q.match(
+    /^((?:[1-3]\s+)?[a-zA-Z\u00C0-\u017F\s-]+?)\s+(\d+)(?:[:\s](\d+))?$/i,
+  );
   if (!match) return null;
 
   const rawBook = match[1].trim();
@@ -59,7 +61,7 @@ export function parseBibleReference(
   const normalizedBook = normalizeDiacritics(rawBook);
   const booksList = getBooksList(lang);
 
-  const found = booksList.find((b) => {
+  const found = booksList.find(b => {
     const normCanonical = normalizeDiacritics(b.canonicalName);
     const normTranslated = normalizeDiacritics(b.translatedName);
     const normShort = normalizeDiacritics(b.shortName);
@@ -77,16 +79,10 @@ export function parseBibleReference(
   if (!found) return null;
   if (chapter < 1 || chapter > found.totalChapters) return null;
 
-  return {
-    bookId: found.bookId,
-    chapter,
-    verse,
-  };
+  return { bookId: found.bookId, chapter, verse };
 }
 
-/**
- * Creates or retrieves the in-memory Orama search index for a Bible version.
- */
+/** Creates or retrieves the in-memory Orama search index for a Bible version. */
 export async function getOrCreateIndex(versionId: string): Promise<AnyOrama | null> {
   if (oramaIndices.has(versionId)) {
     return oramaIndices.get(versionId)!;
@@ -115,9 +111,7 @@ export async function getOrCreateIndex(versionId: string): Promise<AnyOrama | nu
         normalized_text: 'string',
       },
       components: {
-        tokenizer: {
-          stemmer: isFrench ? frenchStemmer : englishStemmer,
-        },
+        tokenizer: { stemmer: isFrench ? frenchStemmer : englishStemmer },
       },
     });
 
@@ -126,11 +120,12 @@ export async function getOrCreateIndex(versionId: string): Promise<AnyOrama | nu
     for (const [testament, books] of Object.entries(bible.testaments)) {
       for (const [bookName, chapters] of Object.entries(books)) {
         const canonical = CANONICAL_BOOKS.find(
-          (b) =>
+          b =>
             b.canonicalName.toLowerCase() === bookName.toLowerCase() ||
-            b.bookId === bookName.toUpperCase().replace(/\s+/g, '_')
+            b.bookId === bookName.toUpperCase().replace(/\s+/g, '_'),
         );
-        const bookId = canonical?.bookId || bookName.toUpperCase().replace(/\s+/g, '_');
+        const bookId =
+          canonical?.bookId || bookName.toUpperCase().replace(/\s+/g, '_');
 
         for (const [chapterStr, verses] of Object.entries(chapters)) {
           const chapter = parseInt(chapterStr, 10);
@@ -163,12 +158,13 @@ export async function getOrCreateIndex(versionId: string): Promise<AnyOrama | nu
 }
 
 /**
- * Searches Bible verses using Orama full-text search with direct reference matching and phrase boosting.
+ * Searches Bible verses using Orama full-text search with direct reference matching
+ * and phrase boosting.
  */
 export async function searchVerses(
   versionId: string,
   query: string,
-  limit = 25
+  limit = 25,
 ): Promise<OramaSearchResult[]> {
   const q = query.trim();
   if (q.length < 2) return [];
@@ -183,7 +179,7 @@ export async function searchVerses(
     const chapterData = await getChapterFromData(versionId, ref.bookId, ref.chapter);
     if (chapterData) {
       if (ref.verse) {
-        const targetVerse = chapterData.verses.find((v) => v.verse === ref.verse);
+        const targetVerse = chapterData.verses.find(v => v.verse === ref.verse);
         if (targetVerse) {
           const id = `${versionId}_${ref.bookId}_${ref.chapter}_${ref.verse}`;
           results.push({
@@ -199,7 +195,7 @@ export async function searchVerses(
         }
       } else {
         // Return first few verses of the chapter
-        chapterData.verses.slice(0, 5).forEach((v) => {
+        chapterData.verses.slice(0, 5).forEach(v => {
           const id = `${versionId}_${ref.bookId}_${ref.chapter}_${v.verse}`;
           results.push({
             id,
@@ -230,11 +226,11 @@ export async function searchVerses(
     tolerance: 1,
   });
 
-  const queryTerms = normalizedQuery.split(/\s+/).filter((w) => w.length > 1);
+  const queryTerms = normalizedQuery.split(/\s+/).filter(w => w.length > 1);
 
   // Score & sort results with exact phrase & term frequency boosting
   const rankedHits = searchResponse.hits
-    .map((hit) => {
+    .map(hit => {
       const doc = hit.document as unknown as VerseDocument;
       let score = hit.score || 0;
 

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import * as bible from './index.js';
 
 describe('bible package exports', () => {
@@ -11,13 +12,34 @@ describe('bible package exports', () => {
 
   it('supports multiple languages and tokens from .agents/data/langs', () => {
     const langs = bible.getLanguages();
-    expect(langs.map((l) => l.code)).toEqual(['fr', 'en', 'es', 'de', 'pt']);
+    expect(langs.map(l => l.code)).toEqual(['fr', 'en', 'es', 'de', 'pt']);
 
     expect(bible.translateToken('old_testament', 'fr')).toBe('Ancien Testament');
     expect(bible.translateToken('old_testament', 'en')).toBe('Old Testament');
     expect(bible.translateToken('old_testament', 'de')).toBe('Altes Testament');
     expect(bible.translateToken('old_testament', 'es')).toBe('Antiguo Testamento');
     expect(bible.translateToken('old_testament', 'pt')).toBe('Antigo Testamento');
+
+    expect(bible.translateToken('search', 'fr')).toBe('Rechercher');
+    expect(bible.translateToken('previous', 'fr')).toBe('Précédent');
+    expect(bible.translateToken('next', 'fr')).toBe('Suivant');
+    expect(bible.translateToken('search', 'en')).toBe('Search');
+    expect(bible.translateToken('previous', 'en')).toBe('Previous');
+    expect(bible.translateToken('next', 'en')).toBe('Next');
+  });
+
+  it('handles canonical book adjacent navigation', () => {
+    // Next book
+    expect(bible.getAdjacentBook('GENESIS', 1)?.bookId).toBe('EXODUS');
+    expect(bible.getAdjacentBook('EXODUS', 1)?.bookId).toBe('LEVITICUS');
+
+    // Previous book
+    expect(bible.getAdjacentBook('EXODUS', -1)?.bookId).toBe('GENESIS');
+    expect(bible.getAdjacentBook('GENESIS', -1)).toBeNull();
+
+    // End boundary
+    expect(bible.getAdjacentBook('REVELATION', 1)).toBeNull();
+    expect(bible.getAdjacentBook('REVELATION', -1)?.bookId).toBe('JUDE');
   });
 
   it('resolves localized book metadata and canonical lists', () => {
@@ -36,13 +58,22 @@ describe('bible package exports', () => {
 
   it('handles cross-book chapter boundary navigation correctly', () => {
     // Next chapter within same book
-    expect(bible.getAdjacentChapter('GENESIS', 1, 1)).toEqual({ bookId: 'GENESIS', chapter: 2 });
-    
+    expect(bible.getAdjacentChapter('GENESIS', 1, 1)).toEqual({
+      bookId: 'GENESIS',
+      chapter: 2,
+    });
+
     // Next chapter across book boundary (Genesis 50 -> Exodus 1)
-    expect(bible.getAdjacentChapter('GENESIS', 50, 1)).toEqual({ bookId: 'EXODUS', chapter: 1 });
+    expect(bible.getAdjacentChapter('GENESIS', 50, 1)).toEqual({
+      bookId: 'EXODUS',
+      chapter: 1,
+    });
 
     // Previous chapter across book boundary (Exodus 1 -> Genesis 50)
-    expect(bible.getAdjacentChapter('EXODUS', 1, -1)).toEqual({ bookId: 'GENESIS', chapter: 50 });
+    expect(bible.getAdjacentChapter('EXODUS', 1, -1)).toEqual({
+      bookId: 'GENESIS',
+      chapter: 50,
+    });
 
     // At start of Bible (Genesis 1 - 1)
     expect(bible.getAdjacentChapter('GENESIS', 1, -1)).toBeNull();
@@ -53,17 +84,17 @@ describe('bible package exports', () => {
 
   it('filters available languages and versions from catalog', () => {
     const availableLangs = bible.getAvailableLanguages();
-    expect(availableLangs.map((l) => l.code).sort()).toEqual(['en', 'fr']);
+    expect(availableLangs.map(l => l.code).sort()).toEqual(['en', 'fr']);
 
     const frenchVersions = bible.getVersionsForLanguage('fr');
     expect(frenchVersions.length).toBe(4);
-    expect(frenchVersions.map((v) => v.id)).toContain('fr_lsg');
-    expect(frenchVersions.map((v) => v.id)).toContain('fr_ost');
+    expect(frenchVersions.map(v => v.id)).toContain('fr_lsg');
+    expect(frenchVersions.map(v => v.id)).toContain('fr_ost');
 
     const englishVersions = bible.getVersionsForLanguage('en');
     expect(englishVersions.length).toBe(6);
-    expect(englishVersions.map((v) => v.id)).toContain('en_kjv');
-    expect(englishVersions.map((v) => v.id)).toContain('en_bsb');
+    expect(englishVersions.map(v => v.id)).toContain('en_kjv');
+    expect(englishVersions.map(v => v.id)).toContain('en_bsb');
   });
 
   it('retrieves chapters directly from JSON reader without SQLite', async () => {
@@ -80,7 +111,9 @@ describe('bible package exports', () => {
   it('searches verses with Orama full-text search', async () => {
     const results = await bible.searchVerses('fr_lsg', 'commencement', 5);
     expect(results.length).toBeGreaterThan(0);
-    expect(results.some((r) => r.text.toLowerCase().includes('commencement'))).toBe(true);
+    expect(results.some(r => r.text.toLowerCase().includes('commencement'))).toBe(
+      true,
+    );
 
     const multiWord = await bible.searchVerses('fr_lsg', 'Dieu créa les cieux', 5);
     expect(multiWord.length).toBeGreaterThan(0);

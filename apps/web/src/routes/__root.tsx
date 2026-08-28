@@ -6,6 +6,7 @@ import {
   getLanguageForVersion,
   getDefaultVersionForLanguage,
   getBooksList,
+  translateToken,
   type SupportedLanguage,
 } from '@bemedev/bible';
 import {
@@ -16,7 +17,7 @@ import {
   useLocation,
   useNavigate,
 } from '@tanstack/solid-router';
-import { createEffect, For } from 'solid-js';
+import { createEffect, For, onCleanup, onMount } from 'solid-js';
 import { HydrationScript } from 'solid-js/web';
 
 import { SearchModal } from '../components/SearchModal.js';
@@ -31,7 +32,6 @@ import {
   cycleTheme,
   increaseFontSize,
   decreaseFontSize,
-  t,
 } from '../store.js';
 
 import appCss from '../styles/app.css?url';
@@ -48,12 +48,12 @@ export const Route = createRootRoute({
 
   shellComponent: ({ children }) => {
     return (
-      <html lang="en" data-theme={theme()}>
+      <html lang={currentLanguage()} data-theme={theme()}>
         <head>
           <HydrationScript />
           <HeadContent />
         </head>
-        <body>
+        <body class='min-h-screen bg-(--bg-color) text-(length:--font-size) leading-(--line-height) text-(--text-color) antialiased transition-colors duration-200'>
           {children}
           <Scripts />
         </body>
@@ -64,6 +64,45 @@ export const Route = createRootRoute({
   component: () => {
     const location = useLocation();
     const navigate = useNavigate();
+
+    // Toggle search with Cmd+K / Ctrl+K
+    onMount(() => {
+      const handleGlobalKeyDown = (e: KeyboardEvent) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          setIsSearchOpen(prev => !prev);
+        }
+      };
+      window.addEventListener('keydown', handleGlobalKeyDown);
+      onCleanup(() => {
+        window.removeEventListener('keydown', handleGlobalKeyDown);
+      });
+    });
+
+    const routeInfo = () => {
+      const parts = location().pathname.split('/').filter(Boolean);
+      if (parts[0] === 'reader' && parts.length >= 2) {
+        return {
+          version: parts[1] || currentVersion(),
+          book: parts[2] || 'GENESIS',
+          chapter: parts[3] || '1',
+        };
+      }
+      return { version: currentVersion(), book: 'GENESIS', chapter: '1' };
+    };
+
+    const activeLanguage = () => {
+      const info = routeInfo();
+      if (info.version) {
+        return getLanguageForVersion(info.version);
+      }
+      return currentLanguage();
+    };
+
+    const activeVersion = () => {
+      const info = routeInfo();
+      return info.version || currentVersion();
+    };
 
     // Synchronize language and version state with the current URL on load and route changes
     createEffect(() => {
@@ -84,26 +123,14 @@ export const Route = createRootRoute({
     const availableLanguages = () => getAvailableLanguages();
 
     // Only display versions belonging to the active language
-    const availableVersions = () => getVersionsForLanguage(currentLanguage());
+    const availableVersions = () => getVersionsForLanguage(activeLanguage());
 
-    const books = () => getBooksList(currentLanguage());
+    const books = () => getBooksList(activeLanguage());
 
     const oldTestamentBooks = () =>
-      books().filter((b) => b.testament === 'Old Testament');
+      books().filter(b => b.testament === 'Old Testament');
     const newTestamentBooks = () =>
-      books().filter((b) => b.testament === 'New Testament');
-
-    const routeInfo = () => {
-      const parts = location().pathname.split('/').filter(Boolean);
-      if (parts[0] === 'reader' && parts.length >= 4) {
-        return {
-          version: parts[1] || currentVersion(),
-          book: parts[2] || 'GENESIS',
-          chapter: parts[3] || '1',
-        };
-      }
-      return { version: currentVersion(), book: 'GENESIS', chapter: '1' };
-    };
+      books().filter(b => b.testament === 'New Testament');
 
     const handleLanguageChange = (lang: SupportedLanguage) => {
       const newVersion = getDefaultVersionForLanguage(lang);
@@ -112,11 +139,7 @@ export const Route = createRootRoute({
       const info = routeInfo();
       navigate({
         to: '/reader/$version/$book/$chapter',
-        params: {
-          version: newVersion,
-          book: info.book,
-          chapter: info.chapter,
-        },
+        params: { version: newVersion, book: info.book, chapter: info.chapter },
       });
     };
 
@@ -127,90 +150,157 @@ export const Route = createRootRoute({
       const info = routeInfo();
       navigate({
         to: '/reader/$version/$book/$chapter',
-        params: {
-          version,
-          book: info.book,
-          chapter: info.chapter,
-        },
+        params: { version, book: info.book, chapter: info.chapter },
       });
     };
 
     const handleBookChange = (bookId: string) => {
       navigate({
         to: '/reader/$version/$book/$chapter',
-        params: {
-          version: currentVersion(),
-          book: bookId,
-          chapter: '1',
-        },
+        params: { version: activeVersion(), book: bookId, chapter: '1' },
       });
     };
 
+    const controlBtnClass =
+      'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-[var(--border-color)] bg-transparent text-[var(--text-color)] text-sm cursor-pointer hover:bg-black/5 dark:hover:bg-white/10 transition-colors focus:outline-none';
+
     return (
-      <div class="app-root">
-        <header class="reader-header">
-          <div style={{ display: 'flex', 'align-items': 'center', gap: '10px', 'flex-wrap': 'wrap' }}>
-            <span style={{ 'font-weight': 'bold', 'letter-spacing': '0.05em' }}>📖 BIBLE</span>
+      <div class='min-h-screen'>
+        <header class='fixed top-0 right-0 left-0 z-50 flex h-[60px] items-center justify-between border-b border-(--border-color) bg-(--header-bg) px-6 backdrop-blur-md transition-colors'>
+          <div class='flex flex-wrap items-center gap-2.5'>
+            <span class='text-base font-bold tracking-wider select-none'>
+              📖 BIBLE
+            </span>
 
             {/* Language Selector (only available languages) */}
             <select
-              class="btn"
-              value={currentLanguage()}
-              onChange={(e) => handleLanguageChange(e.currentTarget.value as SupportedLanguage)}
-              title={t('language', 'Language')}
+              class={controlBtnClass}
+              value={activeLanguage()}
+              onChange={e =>
+                handleLanguageChange(e.currentTarget.value as SupportedLanguage)
+              }
+              title={translateToken('language', activeLanguage(), 'Language')}
             >
               <For each={availableLanguages()}>
-                {(l) => <option value={l.code}>{l.name}</option>}
+                {l => (
+                  <option
+                    value={l.code}
+                    class='text-(--text-color)'
+                    selected={l.code === activeLanguage()}
+                  >
+                    {l.name}
+                  </option>
+                )}
               </For>
             </select>
 
             {/* Version Selector (filtered to selected language) */}
             <select
-              class="btn"
-              value={currentVersion()}
-              onChange={(e) => handleVersionChange(e.currentTarget.value)}
-              title={t('version', 'Version')}
+              class={controlBtnClass}
+              value={activeVersion()}
+              onChange={e => handleVersionChange(e.currentTarget.value)}
+              title={translateToken('version', activeLanguage(), 'Version')}
             >
               <For each={availableVersions()}>
-                {(v) => <option value={v.id}>{v.name}</option>}
+                {v => (
+                  <option
+                    value={v.id}
+                    class='bg-(--bg-color) text-(--text-color)'
+                    selected={v.id === activeVersion()}
+                  >
+                    {v.name}
+                  </option>
+                )}
               </For>
             </select>
 
             {/* Book Selector */}
             <select
-              class="btn"
+              class={controlBtnClass}
               value={routeInfo().book}
-              onChange={(e) => handleBookChange(e.currentTarget.value)}
-              title={t('book', 'Book')}
+              onChange={e => handleBookChange(e.currentTarget.value)}
+              title={translateToken('book', activeLanguage(), 'Book')}
             >
-              <optgroup label={t('old_testament', 'Old Testament')}>
+              <optgroup
+                label={translateToken(
+                  'old_testament',
+                  activeLanguage(),
+                  'Old Testament',
+                )}
+              >
                 <For each={oldTestamentBooks()}>
-                  {(b) => <option value={b.bookId}>{b.translatedName}</option>}
+                  {b => (
+                    <option
+                      value={b.bookId}
+                      class='bg-(--bg-color) text-(--text-color)'
+                      selected={b.bookId === routeInfo().book}
+                    >
+                      {b.translatedName}
+                    </option>
+                  )}
                 </For>
               </optgroup>
-              <optgroup label={t('new_testament', 'New Testament')}>
+              <optgroup
+                label={translateToken(
+                  'new_testament',
+                  activeLanguage(),
+                  'New Testament',
+                )}
+              >
                 <For each={newTestamentBooks()}>
-                  {(b) => <option value={b.bookId}>{b.translatedName}</option>}
+                  {b => (
+                    <option
+                      value={b.bookId}
+                      class='bg-(--bg-color) text-(--text-color)'
+                      selected={b.bookId === routeInfo().book}
+                    >
+                      {b.translatedName}
+                    </option>
+                  )}
                 </For>
               </optgroup>
             </select>
           </div>
 
-          <div style={{ display: 'flex', 'align-items': 'center', gap: '8px' }}>
+          <div class='flex items-center gap-2'>
             <button
-              class="btn"
+              class={controlBtnClass}
               onClick={() => setIsSearchOpen(!isSearchOpen())}
-              title={`${t('search', 'Search')} (Cmd+K)`}
+              title={`${translateToken('search', activeLanguage(), 'Search')} (Cmd+K)`}
             >
-              🔍 {t('search', 'Search')}
+              🔍 {translateToken('search', activeLanguage(), 'Search')}
             </button>
-            <button class="btn" onClick={decreaseFontSize} title="Decrease font size">
+            <button
+              class={controlBtnClass}
+              onClick={decreaseFontSize}
+              title={translateToken(
+                'decrease_font_size',
+                activeLanguage(),
+                'Decrease font size',
+              )}
+            >
               A-
             </button>
-            <button class="btn" onClick={increaseFontSize} title="Increase font size">
+            <button
+              class={controlBtnClass}
+              onClick={increaseFontSize}
+              title={translateToken(
+                'increase_font_size',
+                activeLanguage(),
+                'Increase font size',
+              )}
+            >
               A+
             </button>
-            <button class="btn" onClick={cycleTheme} title="Change Theme">
+            <button
+              class={`${controlBtnClass} font-medium`}
+              onClick={cycleTheme}
+              title={translateToken(
+                'change_theme',
+                activeLanguage(),
+                'Change Theme',
+              )}
+            >
               🎨 {theme().toUpperCase()}
             </button>
           </div>
