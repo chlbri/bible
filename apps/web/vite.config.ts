@@ -17,13 +17,17 @@ export default defineConfig({
   },
   plugins: [
     tailwindcss(),
-    tanstackStart({}),
-    nitro({
-      prerender: {
-        routes: ['/'],
-        crawlLinks: true,
+    tanstackStart({
+      // Render the app entirely on the client. The prerendered file is only an
+      // empty shell: no language-dependent markup is generated on the server, so
+      // the client can start directly with the user's preferred language.
+      spa: {
+        enabled: true,
+        maskPath: '/',
+        prerender: { outputPath: '/index' },
       },
     }),
+    nitro(),
     viteSolid({ ssr: true, extensions: ['.js', '.ts', '.jsx', '.tsx'] }),
   ],
 });

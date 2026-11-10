@@ -8,6 +8,7 @@
   --verse-highlight-bg: rgba(234, 179, 8, 0.22);
   --header-bg: rgba(251, 240, 217, 0.9);
   --border-color: #e5d5be;
+  --hover-bg: rgba(0, 0, 0, 0.05);
   --font-family: 'Georgia', 'Merriweather', serif;
   --font-size: 18px;
   --line-height: 1.8;
@@ -21,6 +22,7 @@
   --verse-highlight-bg: rgba(250, 204, 21, 0.28);
   --header-bg: rgba(255, 255, 255, 0.95);
   --border-color: #e5e7eb;
+  --hover-bg: rgba(0, 0, 0, 0.05);
 }
 
 [data-theme='sepia'] {
@@ -31,6 +33,7 @@
   --verse-highlight-bg: rgba(217, 119, 6, 0.18);
   --header-bg: rgba(251, 240, 217, 0.95);
   --border-color: #e2d1b8;
+  --hover-bg: rgba(0, 0, 0, 0.05);
 }
 
 [data-theme='dark'] {
@@ -41,6 +44,7 @@
   --verse-highlight-bg: rgba(250, 204, 21, 0.16);
   --header-bg: rgba(24, 24, 27, 0.95);
   --border-color: #27272a;
+  --hover-bg: rgba(255, 255, 255, 0.1);
 }
 
 [data-theme='oled'] {
@@ -51,6 +55,7 @@
   --verse-highlight-bg: rgba(250, 204, 21, 0.18);
   --header-bg: rgba(0, 0, 0, 0.95);
   --border-color: #18181b;
+  --hover-bg: rgba(255, 255, 255, 0.1);
 }
 
 [data-theme='soft-blue'],
@@ -63,6 +68,7 @@
   --verse-highlight-bg: rgba(59, 130, 246, 0.18);
   --header-bg: rgba(238, 244, 249, 0.95);
   --border-color: #cbd5e1;
+  --hover-bg: rgba(0, 0, 0, 0.05);
 }
 
 [data-theme='lightgray'],
@@ -75,5 +81,6 @@
   --verse-highlight-bg: rgba(250, 204, 21, 0.26);
   --header-bg: rgba(241, 243, 245, 0.95);
   --border-color: #dee2e6;
+  --hover-bg: rgba(0, 0, 0, 0.05);
 }
 

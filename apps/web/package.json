@@ -12,6 +12,7 @@
     "@bemedev/bible": "workspace:*",
     "@orama/orama": "^3.1.18",
     "@orama/stemmers": "^3.1.18",
+    "@tanstack/solid-pacer": "^0.24.0",
     "@tanstack/solid-router": "1.170.30",
     "@tanstack/solid-start": "1.168.47",
     "@tauri-apps/api": "^2.11.1",

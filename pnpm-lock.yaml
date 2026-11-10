@@ -68,6 +68,9 @@ importers:
       '@orama/stemmers':
         specifier: ^3.1.18
         version: 3.1.18
+      '@tanstack/solid-pacer':
+        specifier: ^0.24.0
+        version: 0.24.0(solid-js@1.9.15)
       '@tanstack/solid-router':
         specifier: 1.170.30
         version: 1.170.30(solid-js@1.9.15)
@@ -1585,9 +1588,17 @@ packages:
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7 || ^8
 
+  '@tanstack/devtools-event-client@0.5.1':
+    resolution: {integrity: sha512-MiBx6Ybr65MFatCnk8IJzhGxd4hvsvEap4aT0gXOC274rV4hm0UPNHxznB5KGYtu84aXrIAsJEBElqzdPe+eeg==}
+    engines: {node: '>=18'}
+
   '@tanstack/history@1.162.1':
     resolution: {integrity: sha512-DR9t6lfLVdrjgCwpglrR9DR7Ok8/HlXjcOE+goWXF3zyuLUO/ug7vMbSFxTqrQTtbRghJfyhmIZ0S6LhPIy44w==}
     engines: {node: '>=20.19'}
+
+  '@tanstack/pacer@0.23.1':
+    resolution: {integrity: sha512-ROZj19aPPGYebeRPhFZNRlqNaR2e4vkcLbgiXfbi5uJu8WiW/etsYmkcAcoSQRGOwGZbbioWRX7xssewDRVRhw==}
+    engines: {node: '>=20'}
 
   '@tanstack/router-core@1.171.27':
     resolution: {integrity: sha512-wDwSLvoLwIaNcnx9UNcN9Mb7Y8QwCYq1U1RQZwyN186gnkIoIYI2SOxy8VqH1vFigbkHkk4FmwMAQlghPgDK2g==}
@@ -1622,6 +1633,12 @@ packages:
     resolution: {integrity: sha512-hTWqJtqIFFdvuCl8WXNyrodp2L9zo2G37xKRrcVmVRWpAB2h+U1LuRAfS4tsFTiWOIoE/B+WDVFB8JpoEdw6jQ==}
     engines: {node: '>=20.19'}
 
+  '@tanstack/solid-pacer@0.24.0':
+    resolution: {integrity: sha512-1N7pBIpYAIKVw2l0/ltimCydVzvXEUnawRV/zUN09EriwpGhNIHTIL7pY2q3TIOAIF3jdSlHyPLlJQNhTtlVTQ==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      solid-js: '>=1.9.5'
+
   '@tanstack/solid-router@1.170.30':
     resolution: {integrity: sha512-FozWeln6hx6o2T45gFFdkGQJxvq/LN0EUlzx7+eENy9HJH/thEBSb89KTkQahULzs9bsMOufzeXJJVgB6H9/wA==}
     engines: {node: '>=20.19'}
@@ -1653,6 +1670,11 @@ packages:
       vite:
         optional: true
 
+  '@tanstack/solid-store@0.11.2':
+    resolution: {integrity: sha512-lscar3xeRKfs/RQBcZjR9NG55sfMP5Pb8S/URohUqcnSB8Yu19JLE/hPjfSd7pKmCpjYq1ZbjqtpIc5bDE1lAQ==}
+    peerDependencies:
+      solid-js: ^1.6.0
+
   '@tanstack/start-client-core@1.170.27':
     resolution: {integrity: sha512-Ro6ZSM0NgYKDMxM0e8qyU4mBfnld2Zb74BA/9f4i35C0Y3IAA8Zxs/DIPfOo9VRYWp5c5n5Q8dRBn2qn0vtPhQ==}
     engines: {node: '>=22.12.0'}
@@ -1680,6 +1702,9 @@ packages:
   '@tanstack/start-storage-context@1.167.29':
     resolution: {integrity: sha512-8qfprC5774XMRDQlMogkfiGpFLiBf0xDG4bMFUbfkSzpCAQwpLbgGY4Zwft22O9rKYq2vUXusKAdVjvJTUEquQ==}
     engines: {node: '>=22.12.0'}
+
+  '@tanstack/store@0.11.2':
+    resolution: {integrity: sha512-sJ4mjol8uQsHV0gOJzzjwXfh2Fwm+Sz0+8deqiTm4jGbMdjzNSW+xZCFm0kUa870uhd8yi+DpKnZb5Kc4apa0Q==}
 
   '@tanstack/virtual-file-routes@1.162.0':
     resolution: {integrity: sha512-uhOeFyxLcU41HzvrxsGpiWdcMbScY1EDgbZ5K7DVRMYInbLYWAC0EA/kx9wXAoSM8q82bUG2hRl8+EAjE6XAbA==}
@@ -5251,7 +5276,14 @@ snapshots:
       tailwindcss: 4.3.3
       vite: 8.2.2(@types/node@26.4.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.12)
 
+  '@tanstack/devtools-event-client@0.5.1': {}
+
   '@tanstack/history@1.162.1': {}
+
+  '@tanstack/pacer@0.23.1':
+    dependencies:
+      '@tanstack/devtools-event-client': 0.5.1
+      '@tanstack/store': 0.11.2
 
   '@tanstack/router-core@1.171.27':
     dependencies:
@@ -5310,6 +5342,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@tanstack/solid-pacer@0.24.0(solid-js@1.9.15)':
+    dependencies:
+      '@tanstack/pacer': 0.23.1
+      '@tanstack/solid-store': 0.11.2(solid-js@1.9.15)
+      solid-js: 1.9.15
+
   '@tanstack/solid-router@1.170.30(solid-js@1.9.15)':
     dependencies:
       '@solid-primitives/refs': 1.1.4(solid-js@1.9.15)
@@ -5360,6 +5398,11 @@ snapshots:
       - unloader
       - vite-plugin-solid
       - webpack
+
+  '@tanstack/solid-store@0.11.2(solid-js@1.9.15)':
+    dependencies:
+      '@tanstack/store': 0.11.2
+      solid-js: 1.9.15
 
   '@tanstack/start-client-core@1.170.27':
     dependencies:
@@ -5423,6 +5466,8 @@ snapshots:
   '@tanstack/start-storage-context@1.167.29':
     dependencies:
       '@tanstack/router-core': 1.171.27
+
+  '@tanstack/store@0.11.2': {}
 
   '@tanstack/virtual-file-routes@1.162.0': {}
 

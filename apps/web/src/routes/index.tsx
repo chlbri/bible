@@ -1,7 +1,6 @@
-import { createFileRoute, Navigate, useNavigate } from '@tanstack/solid-router';
-import { getDefaultVersionForLanguage } from '@bemedev/bible';
+import { createFileRoute, useNavigate } from '@tanstack/solid-router';
 import { onMount } from 'solid-js';
-import { getInitialLanguage, currentVersion, setCurrentLanguage, setCurrentVersion } from '../store.js';
+import { currentVersion } from '../store.js';
 
 export const Route = createFileRoute('/')({
   component: IndexPage,
@@ -10,21 +9,11 @@ export const Route = createFileRoute('/')({
 function IndexPage() {
   const navigate = useNavigate();
 
-  const getTargetVersion = () => {
-    const lang = getInitialLanguage();
-    const ver = getDefaultVersionForLanguage(lang);
-    return ver || currentVersion();
-  };
-
   onMount(() => {
-    const lang = getInitialLanguage();
-    const ver = getDefaultVersionForLanguage(lang);
-    setCurrentLanguage(lang);
-    setCurrentVersion(ver);
     navigate({
       to: '/reader/$version/$book/$chapter',
       params: {
-        version: ver,
+        version: currentVersion(),
         book: 'GENESIS',
         chapter: '1',
       },
@@ -32,14 +21,5 @@ function IndexPage() {
     });
   });
 
-  return (
-    <Navigate
-      to="/reader/$version/$book/$chapter"
-      params={{
-        version: getTargetVersion(),
-        book: 'GENESIS',
-        chapter: '1',
-      }}
-    />
-  );
+  return null;
 }

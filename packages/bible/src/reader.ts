@@ -26,79 +26,57 @@ export async function loadBibleData(
     // Direct static imports for known versions to support bundlers cleanly
     switch (versionId) {
       case 'fr_lsg': {
-        const mod = await import('../../../.agents/data/json/fr_lsg.json', {
-          with: { type: 'json' },
-        });
+        const mod = await import('../../../.agents/data/json/fr_lsg.json');
         data = (mod.default || mod) as unknown as RawBibleJSON;
         break;
       }
       case 'fr_ost': {
-        const mod = await import('../../../.agents/data/json/fr_ost.json', {
-          with: { type: 'json' },
-        });
+        const mod = await import('../../../.agents/data/json/fr_ost.json');
         data = (mod.default || mod) as unknown as RawBibleJSON;
         break;
       }
       case 'fr_mar': {
-        const mod = await import('../../../.agents/data/json/fr_mar.json', {
-          with: { type: 'json' },
-        });
+        const mod = await import('../../../.agents/data/json/fr_mar.json');
         data = (mod.default || mod) as unknown as RawBibleJSON;
         break;
       }
       case 'fr_apee': {
-        const mod = await import('../../../.agents/data/json/fr_apee.json', {
-          with: { type: 'json' },
-        });
+        const mod = await import('../../../.agents/data/json/fr_apee.json');
         data = (mod.default || mod) as unknown as RawBibleJSON;
         break;
       }
       case 'en_kjv': {
-        const mod = await import('../../../.agents/data/json/en_kjv.json', {
-          with: { type: 'json' },
-        });
+        const mod = await import('../../../.agents/data/json/en_kjv.json');
         data = (mod.default || mod) as unknown as RawBibleJSON;
         break;
       }
       case 'en_bsb': {
-        const mod = await import('../../../.agents/data/json/en_bsb.json', {
-          with: { type: 'json' },
-        });
+        const mod = await import('../../../.agents/data/json/en_bsb.json');
         data = (mod.default || mod) as unknown as RawBibleJSON;
         break;
       }
       case 'en_web': {
-        const mod = await import('../../../.agents/data/json/en_web.json', {
-          with: { type: 'json' },
-        });
+        const mod = await import('../../../.agents/data/json/en_web.json');
         data = (mod.default || mod) as unknown as RawBibleJSON;
         break;
       }
       case 'en_ylt': {
-        const mod = await import('../../../.agents/data/json/en_ylt.json', {
-          with: { type: 'json' },
-        });
+        const mod = await import('../../../.agents/data/json/en_ylt.json');
         data = (mod.default || mod) as unknown as RawBibleJSON;
         break;
       }
       case 'en_bbe': {
-        const mod = await import('../../../.agents/data/json/en_bbe.json', {
-          with: { type: 'json' },
-        });
+        const mod = await import('../../../.agents/data/json/en_bbe.json');
         data = (mod.default || mod) as unknown as RawBibleJSON;
         break;
       }
       case 'en_asv': {
-        const mod = await import('../../../.agents/data/json/en_asv.json', {
-          with: { type: 'json' },
-        });
+        const mod = await import('../../../.agents/data/json/en_asv.json');
         data = (mod.default || mod) as unknown as RawBibleJSON;
         break;
       }
       default: {
-        const mod = await import(`../../../.agents/data/json/${versionId}.json`, {
-          with: { type: 'json' },
-        });
+        const mod = await import(`../../../.agents/data/json/${versionId}.json`);
         data = (mod.default || mod) as unknown as RawBibleJSON;
         break;
       }

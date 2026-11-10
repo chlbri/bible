@@ -4,10 +4,17 @@ import {
   getLanguageForVersion,
   translateToken,
 } from '@bemedev/bible';
+import { createDebouncer } from '@tanstack/solid-pacer';
 import { useNavigate } from '@tanstack/solid-router';
 import { createSignal, createEffect, onMount, onCleanup, For, Show } from 'solid-js';
 
 import { isSearchOpen, setIsSearchOpen, currentVersion } from '../store.js';
+
+/** Don't search until the user has typed at least this many characters. */
+const MIN_QUERY_LENGTH = 3;
+
+/** Wait this long after the last keystroke before running the search. */
+const SEARCH_DEBOUNCE_MS = 1300;
 
 export function SearchModal() {
   const [query, setQuery] = createSignal('');
@@ -16,7 +23,38 @@ export function SearchModal() {
   const [isLoading, setIsLoading] = createSignal(false);
   const navigate = useNavigate();
 
-  let debounceTimer: any;
+  // Invalidate results from a previous query when a newer one starts.
+  let requestId = 0;
+
+  const runSearch = async (term: string) => {
+    const id = ++requestId;
+    setIsLoading(true);
+    try {
+      // Pure client-side in-memory Orama search
+      const res = await searchVerses(currentVersion(), term, 30);
+      if (id === requestId) {
+        setResults(res || []);
+      }
+    } catch (err) {
+      console.error('Search error:', err);
+      if (id === requestId) {
+        setResults([]);
+      }
+    } finally {
+      if (id === requestId) {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  // Runs `runSearch` only once the user stops typing for `SEARCH_DEBOUNCE_MS`.
+  const debouncer = createDebouncer(
+    runSearch,
+    { wait: SEARCH_DEBOUNCE_MS },
+    state => ({ isPending: state.isPending }),
+  );
+
+  const isBusy = () => isLoading() || debouncer.state().isPending;
 
   onMount(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -33,25 +71,15 @@ export function SearchModal() {
 
   createEffect(() => {
     const q = query().trim();
-    if (q.length < 2) {
+    if (q.length < MIN_QUERY_LENGTH) {
+      debouncer.cancel();
+      requestId++;
+      setIsLoading(false);
       setResults([]);
       return;
     }
 
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(async () => {
-      setIsLoading(true);
-      try {
-        // Pure client-side in-memory Orama search
-        const res = await searchVerses(currentVersion(), q, 30);
-        setResults(res || []);
-      } catch (err) {
-        console.error('Search error:', err);
-        setResults([]);
-      } finally {
-        setIsLoading(false);
-      }
-    }, 200);
+    debouncer.maybeExecute(q);
   });
 
   const handleSelectVerse = (bookId: string, chapter: number) => {
@@ -119,7 +147,7 @@ export function SearchModal() {
           </div>
 
           <div class='max-h-[400px] overflow-y-auto p-3'>
-            <Show when={isLoading()}>
+            <Show when={isBusy()}>
               <div class='py-5 text-center opacity-60'>
                 {translateToken(
                   'searching',
@@ -130,7 +158,11 @@ export function SearchModal() {
             </Show>
 
             <Show
-              when={!isLoading() && results().length === 0 && query().length >= 2}
+              when={
+                !isBusy() &&
+                results().length === 0 &&
+                query().trim().length >= MIN_QUERY_LENGTH
+              }
             >
               <div class='py-5 text-center opacity-60'>
                 {translateToken(

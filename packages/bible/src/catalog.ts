@@ -15,9 +15,19 @@ export interface VersionCatalogEntry {
   total_verses: number;
 }
 
+/** Maps a catalog entry's version id prefix (e.g. `fr_lsg`) to a language. */
+const LANGUAGE_BY_PREFIX: Record<string, SupportedLanguage> = {
+  fr: "fr",
+  en: "en",
+  es: "es",
+  de: "de",
+  pt: "pt",
+};
+
 export const VERSIONS_CATALOG: VersionCatalogEntry[] = (catalog as any[]).map(
   (item) => {
-    const langCode: SupportedLanguage = item.id.startsWith("fr_") ? "fr" : "en";
+    const prefix = String(item.id).split("_")[0]?.toLowerCase() ?? "";
+    const langCode: SupportedLanguage = LANGUAGE_BY_PREFIX[prefix] ?? "en";
     return { ...item, language_code: langCode };
   },
 );

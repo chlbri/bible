@@ -17,24 +17,69 @@ export type ReaderTheme =
 
 const LANG_STORAGE_KEY = 'bible_language';
 
-export function getInitialLanguage(): SupportedLanguage {
+/** Fallback when neither a saved choice nor a supported browser language exists. */
+export const DEFAULT_LANGUAGE: SupportedLanguage = 'en';
+
+const SUPPORTED_LANGUAGES: readonly SupportedLanguage[] = [
+  'en',
+  'fr',
+  'es',
+  'de',
+  'pt',
+];
+
+function isSupportedLanguage(
+  code: string | undefined,
+): code is SupportedLanguage {
+  return SUPPORTED_LANGUAGES.includes(code as SupportedLanguage);
+}
+
+/** Reads the language persisted by a previous session. Client-only. */
+export function getPersistedLanguage(): SupportedLanguage | null {
   if (typeof window !== 'undefined' && window.localStorage) {
     try {
-      const stored = window.localStorage.getItem(LANG_STORAGE_KEY);
-      if (
-        stored === 'en' ||
-        stored === 'fr' ||
-        stored === 'es' ||
-        stored === 'de' ||
-        stored === 'pt'
-      ) {
+      const stored =
+        window.localStorage.getItem(LANG_STORAGE_KEY) ?? undefined;
+      if (isSupportedLanguage(stored)) {
         return stored;
       }
     } catch {
       // LocalStorage might be disabled or unavailable
     }
   }
-  return 'en';
+  return null;
+}
+
+/**
+ * Picks the first supported language among the user's browser preferences (e.g.
+ * `navigator.languages`). Client-only.
+ */
+export function getPreferredLanguage(): SupportedLanguage | null {
+  if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+    return null;
+  }
+
+  const preferred =
+    navigator.languages && navigator.languages.length > 0
+      ? navigator.languages
+      : [navigator.language];
+
+  for (const tag of preferred) {
+    const code = tag?.toLowerCase().split('-')[0];
+    if (isSupportedLanguage(code)) return code;
+  }
+
+  return null;
+}
+
+/**
+ * Runtime language, in priority order: the explicit choice saved by the user,
+ * the browser's preferred language, then the fallback default.
+ */
+export function getInitialLanguage(): SupportedLanguage {
+  return (
+    getPersistedLanguage() ?? getPreferredLanguage() ?? DEFAULT_LANGUAGE
+  );
 }
 
 export function persistLanguage(lang: SupportedLanguage) {
@@ -47,8 +92,16 @@ export function persistLanguage(lang: SupportedLanguage) {
   }
 }
 
+/**
+ * The app is client-rendered (SPA): signals can be initialized straight from the
+ * user's saved/browser preference, with no server markup to stay in sync with.
+ */
 const initialLang = getInitialLanguage();
 const initialVer = getDefaultVersionForLanguage(initialLang);
+
+if (typeof document !== 'undefined') {
+  document.documentElement.setAttribute('lang', initialLang);
+}
 
 export const [currentLanguage, _setCurrentLanguage] =
   createSignal<SupportedLanguage>(initialLang);
@@ -62,6 +115,9 @@ export const [isSettingsOpen, setIsSettingsOpen] = createSignal<boolean>(false);
 export function setCurrentLanguage(lang: SupportedLanguage) {
   _setCurrentLanguage(lang);
   persistLanguage(lang);
+  if (typeof document !== 'undefined') {
+    document.documentElement.setAttribute('lang', lang);
+  }
 }
 
 export function setLanguageAndDefaultVersion(lang: SupportedLanguage) {
@@ -84,20 +140,26 @@ export function t(key: string, fallback?: string): string {
   return translateToken(key, currentLanguage(), fallback);
 }
 
-export function cycleTheme() {
-  const themes: ReaderTheme[] = [
-    'sepia',
-    'light',
-    'dark',
-    'oled',
-    'soft-blue',
-    'lightgray',
-  ];
-  const nextIdx = (themes.indexOf(theme()) + 1) % themes.length;
-  setTheme(themes[nextIdx]);
+export const THEMES: readonly ReaderTheme[] = [
+  'sepia',
+  'light',
+  'dark',
+  'oled',
+  'soft-blue',
+  'lightgray',
+];
+
+/** Applies a specific theme and updates the document attribute. */
+export function selectTheme(next: ReaderTheme) {
+  setTheme(next);
   if (typeof document !== 'undefined') {
-    document.documentElement.setAttribute('data-theme', themes[nextIdx]);
+    document.documentElement.setAttribute('data-theme', next);
   }
+}
+
+export function cycleTheme() {
+  const nextIdx = (THEMES.indexOf(theme()) + 1) % THEMES.length;
+  selectTheme(THEMES[nextIdx]);
 }
 
 export function increaseFontSize() {
