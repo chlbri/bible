@@ -1,5 +1,5 @@
-import catalog from '../../../.agents/data/catalog.json' with { type: 'json' };
-import type { SupportedLanguage } from './langs-data.js';
+import catalog from "../../../.agents/data/catalog.json" with { type: "json" };
+import type { SupportedLanguage } from "./langs-data.js";
 
 export interface VersionCatalogEntry {
   id: string;
@@ -16,8 +16,8 @@ export interface VersionCatalogEntry {
 }
 
 export const VERSIONS_CATALOG: VersionCatalogEntry[] = (catalog as any[]).map(
-  item => {
-    const langCode: SupportedLanguage = item.id.startsWith('fr_') ? 'fr' : 'en';
+  (item) => {
+    const langCode: SupportedLanguage = item.id.startsWith("fr_") ? "fr" : "en";
     return { ...item, language_code: langCode };
   },
 );
@@ -30,16 +30,16 @@ export function getAvailableLanguages(): {
   code: SupportedLanguage;
   name: string;
 }[] {
-  const presentCodes = new Set(VERSIONS_CATALOG.map(v => v.language_code));
+  const presentCodes = new Set(VERSIONS_CATALOG.map((v) => v.language_code));
   const allLangNames: Record<SupportedLanguage, string> = {
-    fr: 'Français',
-    en: 'English',
-    de: 'Deutsch',
-    es: 'Español',
-    pt: 'Português',
+    fr: "Français",
+    en: "English",
+    de: "Deutsch",
+    es: "Español",
+    pt: "Português",
   };
 
-  return Array.from(presentCodes).map(code => ({
+  return Array.from(presentCodes).map((code) => ({
     code,
     name: allLangNames[code] || code,
   }));
@@ -49,7 +49,7 @@ export function getAvailableLanguages(): {
 export function getVersionsForLanguage(
   langCode: SupportedLanguage | string,
 ): VersionCatalogEntry[] {
-  return VERSIONS_CATALOG.filter(v => v.language_code === langCode);
+  return VERSIONS_CATALOG.filter((v) => v.language_code === langCode);
 }
 
 /** Returns the default Bible version for a given language. */
@@ -60,14 +60,14 @@ export function getDefaultVersionForLanguage(
   if (versions.length > 0) {
     return versions[0].id;
   }
-  return 'fr_lsg';
+  return "fr_lsg";
 }
 
 /** Resolves the language code associated with a version ID. */
 export function getLanguageForVersion(versionId: string): SupportedLanguage {
-  const entry = VERSIONS_CATALOG.find(v => v.id === versionId);
+  const entry = VERSIONS_CATALOG.find((v) => v.id === versionId);
   if (entry) return entry.language_code;
-  if (versionId.startsWith('fr_')) return 'fr';
-  if (versionId.startsWith('en_')) return 'en';
-  return 'fr';
+  if (versionId.startsWith("fr_")) return "fr";
+  if (versionId.startsWith("en_")) return "en";
+  return "fr";
 }
