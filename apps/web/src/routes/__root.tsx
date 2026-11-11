@@ -224,7 +224,7 @@ export const Route = createRootRoute({
     };
 
     const controlBtnClass =
-      'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-[var(--border-color)] bg-transparent text-[var(--text-color)] text-sm cursor-pointer hover:bg-(--hover-bg) transition-colors focus:outline-none';
+      'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-(--border-color) bg-transparent text-(--text-color) text-sm cursor-pointer hover:bg-(--hover-bg) transition-colors focus:outline-none';
 
     return (
       <Show when={mounted()}>
@@ -375,9 +375,9 @@ export const Route = createRootRoute({
               >
                 A+
               </button>
-              <div class='inline-flex items-stretch rounded-md border border-[var(--border-color)] bg-transparent'>
+              <div class='inline-flex items-stretch rounded-md border border-(--border-color) bg-transparent'>
                 <button
-                  class='inline-flex cursor-pointer items-center gap-1.5 rounded-l-md px-3.5 py-1.5 text-sm font-medium text-[var(--text-color)] transition duration-150 hover:bg-(--hover-bg) focus:outline-none active:scale-90'
+                  class='inline-flex cursor-pointer items-center gap-1.5 rounded-l-md px-3.5 py-1.5 text-sm font-medium text-(--text-color) transition duration-150 hover:bg-(--hover-bg) focus:outline-none active:scale-90'
                   onClick={cycleTheme}
                   title={translateToken(
                     'change_theme',
@@ -388,12 +388,12 @@ export const Route = createRootRoute({
                   🎨 {theme().toUpperCase()}
                 </button>
                 <span
-                  class='w-px shrink-0 bg-[var(--border-color)]'
+                  class='w-px shrink-0 bg-(--border-color)'
                   aria-hidden='true'
                 />
                 <div class='relative flex' ref={el => (themeMenuRef = el)}>
                   <button
-                    class='inline-flex cursor-pointer items-center rounded-r-md px-3 py-1.5 text-sm text-[var(--text-color)] transition duration-150 hover:bg-(--hover-bg) focus:outline-none active:scale-90'
+                    class='inline-flex cursor-pointer items-center rounded-r-md px-3 py-1.5 text-sm text-(--text-color) transition duration-150 hover:bg-(--hover-bg) focus:outline-none active:scale-90'
                     onClick={() => setIsThemeMenuOpen(prev => !prev)}
                     title={translateToken(
                       'change_theme',

@@ -106,7 +106,7 @@ function ReaderPage() {
   };
 
   const navBtnClass =
-    'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-[var(--border-color)] bg-transparent text-[var(--text-color)] text-sm cursor-pointer hover:bg-black/5 dark:hover:bg-white/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed';
+    'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-(--border-color) bg-transparent text-(--text-color) text-sm cursor-pointer hover:bg-black/5 dark:hover:bg-white/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed';
 
   const verseClass =
     'relative inline px-1.5 py-0.5 mr-1 rounded box-decoration-clone cursor-pointer transition-all duration-200 hover:bg-(--verse-highlight-bg) hover:shadow-[0_0_0_2px_var(--verse-highlight-bg)]';
@@ -142,7 +142,7 @@ function ReaderPage() {
         )}
       </Show>
 
-      <footer class='fixed right-0 bottom-0 left-0 z-50 flex h-[54px] items-center justify-between border-t border-(--border-color) bg-(--header-bg) px-6 text-sm backdrop-blur-md'>
+      <footer class='fixed right-0 bottom-0 left-0 z-50 flex h-13.5 items-center justify-between border-t border-(--border-color) bg-(--header-bg) px-6 text-sm backdrop-blur-md'>
         <button
           class={navBtnClass}
           disabled={!prevTarget()}

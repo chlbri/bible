@@ -104,7 +104,7 @@ export function SearchModal() {
         onClick={() => setIsSearchOpen(false)}
       >
         <div
-          class='w-full max-w-[640px] overflow-hidden rounded-xl border border-(--border-color) bg-(--bg-color) text-(--text-color) shadow-2xl'
+          class='w-full max-w-160 overflow-hidden rounded-xl border border-(--border-color) bg-(--bg-color) text-(--text-color) shadow-2xl'
           onClick={e => e.stopPropagation()}
         >
           <div class='flex border-b border-(--border-color) px-3'>
@@ -146,7 +146,7 @@ export function SearchModal() {
             </div>
           </div>
 
-          <div class='max-h-[400px] overflow-y-auto p-3'>
+          <div class='max-h-100 overflow-y-auto p-3'>
             <Show when={isBusy()}>
               <div class='py-5 text-center opacity-60'>
                 {translateToken(
