@@ -59,6 +59,7 @@
     "dev:web": "pnpm --filter @bemedev/bible-web dev",
     "dev:tauri": "pnpm dlx @tauri-apps/cli dev --config apps/src-tauri/tauri.conf.json",
     "build:tauri": "pnpm dlx @tauri-apps/cli build --config apps/src-tauri/tauri.conf.json",
+    "build:tauri:windows": "pnpm dlx @tauri-apps/cli build --config apps/src-tauri/tauri.conf.json --runner cargo-xwin --target x86_64-pc-windows-msvc --bundles nsis",
     "p-q": "pretty-quick"
   },
   "devDependencies": {
